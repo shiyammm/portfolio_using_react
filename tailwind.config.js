@@ -9,12 +9,12 @@ export default {
         violet: '#7A8FFF',
       },
       fontFamily: {
-        acme: ['var(--font-acme)'],
-        'circular-book': ['var(--font-circular-book)'],
-        'circular-medium': ['var(--font-circular-medium)'],
-        'neue-montreal': ['var(--font-neue-montreal)'],
-        'roslindale-display': ['var(--font-roslindale-display)'],
-        gtApina: ['var(--font-gtApina)'],
+        acme: ['acme', 'sans-serif'],
+        'circular-book': ['circular-book', 'sans-serif'],
+        'circular-medium': ['circular-medium', 'sans-serif'],
+        'neue-montreal': ['neue-montreal', 'sans-serif'],
+        'roslindale-display': ['roslindale-display', 'sans-serif'],
+        gtApina: ['gtAlpina', 'sans-serif'],
       },
       screens: {
         '2xl': { max: '1535px' },
