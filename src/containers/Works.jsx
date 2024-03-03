@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import ViewSite from '../components/VIewSite';
+import ViewSite from '../components/ViewSite';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
