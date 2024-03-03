@@ -4,27 +4,27 @@
 
 @font-face {
   font-family: acme;
-  src: url(../public/assets/fonts/Acme-Regular.ttf);
+  src: url(./assets/fonts/Acme-Regular.ttf);
 }
 @font-face {
   font-family: circular-book;
-  src: url(../public/assets/fonts/CircularStd-Book.ttf);
+  src: url(./assets/fonts/CircularStd-Book.ttf);
 }
 @font-face {
   font-family: circular-medium;
-  src: url(../public/assets/fonts/circular-std-medium.ttf);
+  src: url(./assets/fonts/circular-std-medium.ttf);
 }
 @font-face {
   font-family: neue-montreal;
-  src: url(../public/assets/fonts/NeueMontreal-Regular.ttf);
+  src: url(./assets/fonts/NeueMontreal-Regular.ttf);
 }
 @font-face {
   font-family: roslindale-display;
-  src: url(../public/assets/fonts/RoslindaleDisplayCondensed-Regular.ttf);
+  src: url(./assets/fonts/RoslindaleDisplayCondensed-Regular.ttf);
 }
 @font-face {
   font-family: gtAlpina;
-  src: url(../public/assets/fonts/GT-Alpina-Regular-Italic.ttf);
+  src: url(./assets/fonts/GT-Alpina-Regular-Italic.ttf);
 }
 
 .menu {
