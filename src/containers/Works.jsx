@@ -11,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const Works = () => {
   const slider = useRef();
   const component = useRef();
+  const cursor = useRef();
 
   useGSAP(
     () => {
@@ -20,26 +21,65 @@ const Works = () => {
     */
       function getScrollAmount() {
         let workWidth = slider.current.scrollWidth;
-        return -(workWidth - window.innerWidth);
+        let innerWidth = window.innerWidth;
+        let xOffset = innerWidth * 0.2; // 20% of innerWidth
+        let scrollAmount = -(workWidth - innerWidth + xOffset); // Adjusted scroll amount
+
+        return scrollAmount;
       }
 
-      gsap.to(slider.current, {
-        x: getScrollAmount,
-        duration: 5,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: component.current,
-          start: 'top 0%',
-          // "+=" - the starting amount
-          end: () => `+=${getScrollAmount() * -1}`,
-          pin: true,
-          scrub: 1,
+      gsap.fromTo(
+        slider.current,
+        { xPercent: 20 },
+        {
+          x: getScrollAmount,
+          duration: 5,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: component.current,
+            start: 'top 0%',
+            // "+=" - the starting amount
+            end: () => `+=${getScrollAmount() * -1}`,
+            pin: true,
+            scrub: 1,
 
-          // It'll get the width of the component for every screen-size refresh to be responsive for every devices
-          invalidateOnRefresh: true,
-          // markers: true,
+            // It'll get the width of the component for every screen-size refresh to be responsive for every devices
+            invalidateOnRefresh: true,
+            // markers: true,
+          },
         },
-      });
+      );
+    },
+    { scope: component },
+  );
+
+  useGSAP(
+    () => {
+      const handleMouse = (e) => {
+        gsap.to(cursor.current, {
+          x: e.clientX,
+          y: e.clientY,
+        });
+      };
+
+      const handleMouseEnter = () => {
+        gsap.to(cursor.current, {
+          scale: 1,
+          opacity: 1,
+        });
+      };
+
+      const handleMouseLeave = () => {
+        gsap.to(cursor.current, {
+          scale: 0,
+          opacity: 0,
+        });
+      };
+
+      // Add event listeners for pointermove, mouseenter, and mouseleave
+      component.current.addEventListener('pointermove', handleMouse);
+      component.current.addEventListener('mouseenter', handleMouseEnter);
+      component.current.addEventListener('mouseleave', handleMouseLeave);
     },
     { scope: component },
   );
@@ -49,17 +89,22 @@ const Works = () => {
       className="relative w-full h-screen overflow-hidden text-white"
       ref={component}
     >
-      <ViewSite component="component" />
+      <div className="absolute z-[99]" ref={cursor}>
+        <ViewSite component="component" />
+      </div>
       <div className="fixed top-[10rem] text-white font-roslindale-display text-[7rem] left-[5rem]">
         <span>Works →</span>
       </div>
-      <div className="flex flex-nowrap work w-fit" ref={slider}>
+      <div
+        className="flex items-end h-screen flex-nowrap work w-fit"
+        ref={slider}
+      >
         {projectsData.map((project, index) => (
           <div
-            className="flex items-end w-full pb-[5rem] h-screen shrink-0 px-[5rem] relative"
+            className="flex items-end w-full p-[5rem] shrink-0 relative border-[rem] border-red-500"
             key={index}
           >
-            <div className="flex items-center  gap-[8rem]">
+            <div className="flex items-center w-full gap-[8rem]">
               <div className="w-1/2 h-[30rem]">
                 <img
                   src={project.imageUrl}
