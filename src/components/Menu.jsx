@@ -9,38 +9,34 @@ const Menu = (props) => {
   const menuRef = useRef();
   const linksRef = useRef();
 
-  useGSAP(
-    () => {
-      tl.current = gsap.timeline({
-        paused: true,
-      });
-      tl.current.to(menuRef.current, {
-        right: 0,
-        duration: 1,
-      });
-      tl.current.from('.list', {
-        y: 60,
-        delay: 0.2,
-        stagger: 0.1,
-        opacity: 0,
-      });
-      tl.current.from(linksRef, {
-        y: 50,
-        opacity: 0,
-        stagger: 0.2,
-      });
-      if (toggle) {
-        tl.current.play();
-      } else {
-        tl.current.reverse();
-      }
-    },
-    { scope: menuRef },
-  );
+  useGSAP(() => {
+    tl.current = gsap.timeline({
+      paused: true,
+      reversed: true,
+    });
+    tl.current.from(menuRef.current, {
+      right: '-100vw',
+      duration: 0.3,
+    });
+    tl.current.from('.list', {
+      y: 60,
+      stagger: 0.1,
+      opacity: 0,
+    });
+    tl.current.from(linksRef.current, {
+      y: 50,
+      stagger: 0.2,
+      opacity: 0,
+    });
+  });
+
+  useGSAP(() => {
+    toggle ? tl.current.play() : tl.current.reverse();
+  });
 
   return (
     <div
-      className="fixed top-0 flex flex-col items-center justify-center w-full h-screen right-[-100vw] bg-gray"
+      className="fixed top-0 right-0 flex flex-col items-center justify-center w-full h-screen bg-gray"
       ref={menuRef}
     >
       <ul className="unordered font-roslindale-display text-[11rem] text-white text-center leading-[15rem]">
