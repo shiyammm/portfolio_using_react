@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRef } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
@@ -9,6 +9,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const Works = () => {
+  const [hoverLink, setHoverLink] = useState(false);
+  const [hoverText, setHoverText] = useState(false);
   const slider = useRef();
   const component = useRef();
   const cursor = useRef();
@@ -49,16 +51,12 @@ const Works = () => {
           },
         },
       );
-    },
-    { scope: component },
-  );
 
-  useGSAP(
-    () => {
       const handleMouse = (e) => {
         gsap.to(cursor.current, {
           x: e.clientX,
           y: e.clientY,
+          duration: 0.5,
         });
       };
 
@@ -77,12 +75,33 @@ const Works = () => {
       };
 
       // Add event listeners for pointermove, mouseenter, and mouseleave
-      component.current.addEventListener('pointermove', handleMouse);
-      component.current.addEventListener('mouseenter', handleMouseEnter);
-      component.current.addEventListener('mouseleave', handleMouseLeave);
+      const handlers = {
+        pointermove: handleMouse,
+        mouseenter: handleMouseEnter,
+        mouseleave: handleMouseLeave,
+      };
+
+      Object.entries(handlers).forEach(([event, handler]) => {
+        component.current.addEventListener(event, handler);
+      });
     },
     { scope: component },
   );
+
+  const handleHoverLinkEnter = () => {
+    setHoverLink(true);
+  };
+
+  const handleHoverLinkLeave = () => {
+    setHoverLink(false);
+  };
+  const handleHoverTextEnter = () => {
+    setHoverText(true);
+  };
+
+  const handleHoverTextLeave = () => {
+    setHoverText(false);
+  };
 
   return (
     <section
@@ -90,30 +109,40 @@ const Works = () => {
       ref={component}
     >
       <div className="absolute z-[99]" ref={cursor}>
-        <ViewSite component="component" />
+        <ViewSite hoverLink={hoverLink} hoverText={hoverText} />
       </div>
-      <div className="fixed top-[10rem] text-white font-roslindale-display text-[7rem] left-[5rem]">
-        <span>Works →</span>
+      <div className="fixed top-[9rem] text-white font-roslindale-display text-[7rem] left-14 z-[10]">
+        <span
+          onMouseEnter={handleHoverTextEnter}
+          onMouseLeave={handleHoverTextLeave}
+        >
+          Works →
+        </span>
       </div>
-      <div
-        className="flex items-end h-screen flex-nowrap work w-fit"
-        ref={slider}
-      >
+      <div className="flex items-end h-screen flex-nowrap work" ref={slider}>
         {projectsData.map((project, index) => (
           <div
-            className="flex items-end w-full p-[5rem] shrink-0 relative border-[rem] border-red-500"
+            className="flex items-end w-full px-[5rem] py-[3rem] shrink-0 relative border-[em] border-red-500"
             key={index}
           >
-            <div className="flex items-center w-full gap-[8rem]">
-              <div className="w-1/2 h-[30rem]">
+            <div className="flex items-center w-full gap-[8rem] border-[em] border-green-500">
+              <div
+                className="w-1/2 min-h-[30rem]"
+                onMouseEnter={handleHoverLinkEnter}
+                onMouseLeave={handleHoverLinkLeave}
+              >
                 <img
                   src={project.imageUrl}
-                  className="object-cover object-left w-full h-full"
+                  className="object-cover object-left w-full h-full transition-all"
                   alt={project.title}
                 />
               </div>
-              <div className="flex flex-col w-1/2 gap-4">
-                <h3 className="text-[2rem] uppercase font-circular-book tracking-[0.2rem] font-bold">
+              <div
+                className="flex flex-col w-1/2 gap-4"
+                onMouseEnter={handleHoverTextEnter}
+                onMouseLeave={handleHoverTextLeave}
+              >
+                <h3 className="text-[2rem] uppercase font-circular-book tracking-[0.2rem] font-bold text-white">
                   {project.title}
                 </h3>
                 <p className="text-xl">{project.description}</p>
