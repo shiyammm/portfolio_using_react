@@ -10,7 +10,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed w-full backdrop-blur-lg h-[6rem] text-white z-[99] bg-ed-500">
+    <nav className="fixed w-full backdrop-blur-lg h-[6rem] text-white z-[99] overflow-hidden">
       <div className="flex justify-between w-full mt-8 px-14">
         <header className="font-roslindale-display text-4xl text-white z-[60]">
           Shiyam
@@ -36,7 +36,7 @@ const Navbar = () => {
           </svg>
         </div>
       </div>
-      {toggle && <Menu toggle={toggle} />}
+      <Menu toggle={toggle} />
     </nav>
   );
 };

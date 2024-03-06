@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PiStarFourFill } from 'react-icons/pi';
 
 const Menu = (props) => {
@@ -14,10 +14,17 @@ const Menu = (props) => {
       paused: true,
       reversed: true,
     });
-    tl.current.from(menuRef.current, {
-      right: '-100vw',
-      duration: 0.3,
-    });
+    tl.current.fromTo(
+      menuRef.current,
+      {
+        x: '-100%',
+        duration: 0.5,
+      },
+      {
+        x: '0%',
+        duration: 0.5,
+      },
+    );
     tl.current.from('.list', {
       y: 60,
       stagger: 0.1,
@@ -30,13 +37,13 @@ const Menu = (props) => {
     });
   });
 
-  useGSAP(() => {
+  useEffect(() => {
     toggle ? tl.current.play() : tl.current.reverse();
-  });
+  }, [toggle]);
 
   return (
     <div
-      className="fixed top-0 right-0 flex flex-col items-center justify-center w-full h-screen bg-gray"
+      className="fixed top-0 flex flex-col items-center justify-center w-full h-screen bg-gray"
       ref={menuRef}
     >
       <ul className="unordered font-roslindale-display text-[11rem] text-white text-center leading-[15rem]">
