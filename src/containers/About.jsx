@@ -1,13 +1,13 @@
 import Title from '../components/Title';
 import React from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 const About = () => {
   return (
     <div className="relative flex flex-col items-center justify-center w-full h-screen text-white bg-gray">
-      <div className="absolute top-10">
-        <Title title="About" />
-      </div>
-      <p className="text-center text-[2.5rem] font-neue-montreal w-[75rem] mt-[8rem] leading-[4rem]">
+      <Title title="About" />
+      <p className="text-center text-[2.5rem] font-neue-montreal w-[75rem] mt-[8rem] leading-[4rem] split">
         Hi, this is <span className="font-gtApina">Shiyam Robert </span>, a
         passionate <span className="font-gtApina"> front-end developer</span>{' '}
         with a focus on crafting captivating digital experiences. Embracing a
