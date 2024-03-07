@@ -3,17 +3,13 @@ import { useRef } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import ViewSite from '../components/ViewSite';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Works = () => {
-  const [hoverLink, setHoverLink] = useState(false);
-  const [hoverText, setHoverText] = useState(false);
+const Works = ({ cursor, setHoverLink, setHoverText }) => {
   const slider = useRef();
   const component = useRef();
-  const cursor = useRef();
 
   useGSAP(
     () => {
@@ -52,14 +48,6 @@ const Works = () => {
         },
       );
 
-      const handleMouse = (e) => {
-        gsap.to(cursor.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.5,
-        });
-      };
-
       const handleMouseEnter = () => {
         gsap.to(cursor.current, {
           scale: 1,
@@ -67,23 +55,8 @@ const Works = () => {
         });
       };
 
-      const handleMouseLeave = () => {
-        gsap.to(cursor.current, {
-          scale: 0,
-          opacity: 0,
-        });
-      };
-
-      // Add event listeners for pointermove, mouseenter, and mouseleave
-      const handlers = {
-        pointermove: handleMouse,
-        mouseenter: handleMouseEnter,
-        mouseleave: handleMouseLeave,
-      };
-
-      Object.entries(handlers).forEach(([event, handler]) => {
-        component.current.addEventListener(event, handler);
-      });
+      // Add event listeners for mouseenter
+      component.current.addEventListener('mouseenter', handleMouseEnter);
     },
     { scope: component },
   );
@@ -108,9 +81,6 @@ const Works = () => {
       className="relative w-full h-screen overflow-hidden text-white"
       ref={component}
     >
-      <div className="absolute z-[99]" ref={cursor}>
-        <ViewSite hoverLink={hoverLink} hoverText={hoverText} />
-      </div>
       <div className="fixed top-[9rem] text-white font-roslindale-display text-[7rem] left-14 z-[10]">
         <span
           onMouseEnter={handleHoverTextEnter}
