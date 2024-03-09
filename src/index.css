@@ -26,6 +26,22 @@
   font-family: gtAlpina;
   src: url(./assets/fonts/GT-Alpina-Regular-Italic.ttf);
 }
+@font-face {
+  font-family: OverusedGrotesk-Bold;
+  src: url(./assets/fonts/OverusedGrotesk-Bold.ttf);
+}
+@font-face {
+  font-family: OverusedGrotesk-Medium;
+  src: url(./assets/fonts/OverusedGrotesk-Medium.ttf);
+}
+@font-face {
+  font-family: OverusedGrotesk-Bold;
+  src: url(./assets/fonts/OverusedGrotesk-VF.ttf);
+}
+@font-face {
+  font-family: BebasNeue-Regular;
+  src: url(./assets/fonts/BebasNeue-Regular.ttf);
+}
 
 .menu {
   background-color: transparent;
