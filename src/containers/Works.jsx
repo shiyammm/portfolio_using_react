@@ -4,6 +4,7 @@ import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
+import TiltImage from '../components/TiltImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -116,40 +117,29 @@ const Works = ({ cursor, setHoverLink, setHoverText }) => {
         </div>
         {projectsData.map((project, index) => (
           <div
-            className="relative flex items-center justify-center w-screen h-screen space-x-[5rem] text-white"
+            className="flex items-center justify-center w-screen h-screen space-x-[5rem] text-white"
             key={index}
           >
-            <a
-              href={`${project.link}`}
-              target="blank"
-              onMouseEnter={handleHoverLinkEnter}
-              onMouseLeave={handleHoverLinkLeave}
-            >
-              <img
-                src={project.imageUrl}
-                alt=""
-                className={`w-[57rem] h-[40rem] object-cover rounded-[2rem] ${
-                  index === 1
-                    ? 'object-left'
-                    : index === 2
-                    ? 'object-[40%]'
-                    : ''
-                }`}
-              />
-            </a>
-            <div className="h-[40rem] w-[30rem] flex flex-col gap-4">
-              <div className="absolute top-[14rem]">
-                <span className="text-[8rem] font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
+            <TiltImage
+              projectImage={project.imageUrl}
+              projectLink={project.link}
+              handleHoverLinkEnter={handleHoverLinkEnter}
+              handleHoverLinkLeave={handleHoverLinkLeave}
+              index={index}
+            />
+            <div className="h-[40rem] w-[30rem] flex flex-col gap-4 relative">
+              <div className="absolute top-[5rem]">
+                <span className="text-[9rem] font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <h3 className="text-[4rem] font-medium font-BebasNeue-Regular text-white">
                   {project.title}
                 </h3>
-                <div className="space-x-[1rem] pt-[2rem]">
+                <div className="space-x-[1rem] pt-[1rem]">
                   {project.tags.map((tech, index) => (
                     <button
                       key={index}
-                      className="py-3 text-xl font-medium tracking-[0.1rem] text-white border-2 rounded-xl px-7 border-violet "
+                      className="py-2 text-lg font-medium tracking-[0.1rem] text-white border-2 rounded-3xl px-6 border-violet "
                     >
                       {tech}
                     </button>
