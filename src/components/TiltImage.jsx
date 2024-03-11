@@ -1,67 +1,67 @@
-import React from 'react';
-import { useMotionValue, useSpring, useTransform, motion } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion } from 'framer-motion';
 
-const TiltImage = ({
-  projectImage,
-  projectLink,
-  index,
-  handleHoverLinkEnter,
-  handleHoverLinkLeave,
-}) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+const ROTATION_RANGE = 32.5;
+const HALF_ROTATION_RANGE = 32.5 / 2;
 
-  const motionSpringX = useSpring(x);
-  const motionSpringY = useSpring(y);
+const TiltImage = ({ projectImage, index, setHoverLink }) => {
+  const ref = useRef(null);
 
-  const rotateX = useTransform(motionSpringY, [-0.5, 0.5], ['3deg', '-3deg']);
-  const rotateY = useTransform(motionSpringX, [-0.5, 0.5], ['3deg', '-3deg']);
-  const handleImage = (e) => {
-    const image = e.target.getBoundingClientRect();
+  const [rotateX, setRotateX] = useState(0);
+  const [rotateY, setRotateY] = useState(0);
 
-    const imageWidth = image.width;
-    const imageHeight = image.height;
+  const handleMouseMove = (e) => {
+    if (!ref.current) return;
 
-    const mouseX = e.clientX - image.left;
-    const mouseY = e.clientY - image.top;
+    const rect = ref.current.getBoundingClientRect();
 
-    const xPercentage = mouseX / imageWidth - 0.5;
-    const yPercentage = mouseY / imageHeight - 0.5;
+    const width = rect.width;
+    const height = rect.height;
 
-    x.set(xPercentage);
-    y.set(yPercentage);
+    const mouseX = (e.clientX - rect.left) * ROTATION_RANGE;
+    const mouseY = (e.clientY - rect.top) * ROTATION_RANGE;
+
+    const rY = mouseX / width - HALF_ROTATION_RANGE;
+    const rX = (mouseY / height - HALF_ROTATION_RANGE) * -1;
+
+    setRotateX(rX);
+    setRotateY(rY);
+    setHoverLink(true);
+  };
+
+  const handleMouseLeave = () => {
+    if (!ref.current) return;
+    setRotateX(0);
+    setRotateY(0);
+    setHoverLink(false);
   };
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-indigo-300 to-violet-300 w-[59rem] h-[42rem] relative rounded-[2rem]"
-      onMouseMove={handleImage}
+      className="bg-gradient-to-br from-indigo-300 to-violet-300 w-[58rem] h-[41rem] relative rounded-[2rem]"
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
       style={{
-        rotateX,
-        rotateY,
         transformStyle: 'preserve-3d',
       }}
+      animate={{
+        rotateX,
+        rotateY,
+      }}
     >
-      {/* <a
-        href={`${projectLink}`}
-        key={index}
-        className="relative bg-red-500 w-[69rem] h-[45rem] "
-        target="blank"
-        onMouseEnter={handleHoverLinkEnter}
-        onMouseLeave={handleHoverLinkLeave}
-      > */}
       <img
         src={projectImage}
         style={{
+          transform: 'translateZ(75px)',
           transformStyle: 'preserve-3d',
         }}
         key={index}
         alt=""
-        className={`w-[57rem] h-[40rem] object-cover rounded-[2rem] absolute inset-4 place-content-center ${
+        className={`w-[57rem] h-[40rem] object-cover rounded-[2rem] absolute inset-2 place-content-center ${
           index === 1 ? 'object-left' : index === 2 ? 'object-[40%]' : ''
         }`}
       />
-      {/* </a> */}
     </motion.div>
   );
 };
