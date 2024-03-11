@@ -120,15 +120,24 @@ const Works = ({ cursor, setHoverLink, setHoverText }) => {
             className="flex items-center justify-center w-screen h-screen space-x-[5rem] text-white"
             key={index}
           >
-            <TiltImage
-              projectImage={project.imageUrl}
-              projectLink={project.link}
-              handleHoverLinkEnter={handleHoverLinkEnter}
-              handleHoverLinkLeave={handleHoverLinkLeave}
-              index={index}
-            />
+            <a
+              href={`${project.link}`}
+              key={index}
+              className="relative"
+              target="blank"
+              onMouseEnter={handleHoverLinkEnter}
+              onMouseLeave={handleHoverLinkLeave}
+            >
+              <TiltImage
+                projectImage={project.imageUrl}
+                projectLink={project.link}
+                setHoverLink={setHoverLink}
+                index={index}
+              />
+            </a>
             <div className="h-[40rem] w-[30rem] flex flex-col gap-4 relative">
-              <div className="absolute top-[5rem]">
+              <div className="absolute top-[10rem]">
+                {/* Add vertical scroll effect */}
                 <span className="text-[9rem] font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
                   {String(index + 1).padStart(2, '0')}
                 </span>
