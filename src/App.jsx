@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import Lenis from '@studio-freight/lenis';
 import Navbar from './containers/Navbar';
 import Hero from './containers/Hero';
 import About from './containers/About';
@@ -14,16 +13,10 @@ const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverText, setHoverText] = useState(false);
   const [hoverIcon, setHoverIcon] = useState(false);
+  const [lensHover, setLensHover] = useState(false);
 
   const cursor = useRef();
-  const lenis = new Lenis();
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-
-  requestAnimationFrame(raf);
+  const containerRef = useRef(null);
 
   useGSAP(() => {
     const mouse = (e) => {
@@ -42,6 +35,7 @@ const App = () => {
           hoverLink={hoverLink}
           hoverText={hoverText}
           hoverIcon={hoverIcon}
+          lensHover={lensHover}
         />
       </div>
       <Navbar />
@@ -55,7 +49,7 @@ const App = () => {
         setHoverLink={setHoverLink}
       />
       <WhatIUse hoverIcon={hoverIcon} setHoverIcon={setHoverIcon} />
-      <Contact />
+      <Contact lensHover={lensHover} setLensHover={setLensHover} />
     </main>
   );
 };
