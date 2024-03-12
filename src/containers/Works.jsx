@@ -5,10 +5,11 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
+import Magnet from '../components/Magnet';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Works = ({ cursor, setHoverLink, setHoverText }) => {
+const Works = ({ cursor, setHoverLink, setHoverIcon }) => {
   const slider = useRef();
   const component = useRef();
   const h2Ref = useRef();
@@ -90,6 +91,13 @@ const Works = ({ cursor, setHoverLink, setHoverText }) => {
   const handleHoverTextLeave = () => {
     setHoverText(false);
   };
+  const handleHoverIconEnter = () => {
+    setHoverIcon(true);
+  };
+
+  const handleHoverIconLeave = () => {
+    setHoverIcon(false);
+  };
 
   return (
     <section ref={component} className="overflow-hidden bg-[#121315]">
@@ -148,9 +156,11 @@ const Works = ({ cursor, setHoverLink, setHoverText }) => {
                   {project.tags.map((tech, index) => (
                     <button
                       key={index}
-                      className="py-2 text-lg font-medium tracking-[0.1rem] text-white border-2 rounded-3xl px-6 border-violet "
+                      className="z-[100]"
+                      onMouseEnter={handleHoverIconEnter}
+                      onMouseLeave={handleHoverIconLeave}
                     >
-                      {tech}
+                      <Magnet>{tech}</Magnet>
                     </button>
                   ))}
                 </div>

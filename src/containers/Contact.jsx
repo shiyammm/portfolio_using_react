@@ -2,7 +2,7 @@ import React from 'react';
 import { SiGithub } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa';
 
-const Contact = ({ setLensHover }) => {
+const Contact = ({ setLensHover, setEnterContactPage }) => {
   const connectText = "Let's Connect →";
 
   const connectTextWords = connectText.split('');
@@ -14,28 +14,43 @@ const Contact = ({ setLensHover }) => {
     setLensHover(false);
   };
 
+  const handleCursorEnter = () => {
+    setEnterContactPage(true);
+  };
+  const handleCursorLeave = () => {
+    setEnterContactPage(false);
+  };
+
   return (
-    <div className="relative flex items-end w-full h-screen px-14 rounded-t-3xl contact">
-      <a
-        href="mailto:shiyamrobert@gmail.com"
-        className="absolute flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-      >
-        <h4
-          className={`text-[7rem] font-neue-montreal tracking-tight text-white `}
-          onMouseEnter={handleLensEnter}
-          onMouseLeave={handleLensLeave}
-        >
-          {connectTextWords.map((connectTextWord, index) => (
-            <span key={index} className={`hover:text-[9rem] hover:text-bold`}>
-              {connectTextWord}
-            </span>
-          ))}
-        </h4>
-        <button className="px-2 py-1 absolute top-0 right-0 text-sm font-medium border-[1px] bg-violet hover:bg-violet/70 rounded-2xl font-circular-medium flex justify-center items-center">
+    <section
+      className="relative flex items-end w-full h-screen px-14 rounded-t-3xl contact"
+      onMouseEnter={handleCursorEnter}
+      onMouseLeave={handleCursorLeave}
+    >
+      <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[60rem] h-[20rem]">
+        <div className="relative">
+          <a href="mailto:shiyamrobert@gmail.com" className="">
+            <h4
+              className={`text-[7rem] font-neue-montreal text-white`}
+              onMouseEnter={handleLensEnter}
+              onMouseLeave={handleLensLeave}
+            >
+              {connectTextWords.map((connectTextWord, index) => (
+                <span
+                  key={index}
+                  className={`hover:text-[9rem] hover:text-bold transition ease-in-out delay-150`}
+                >
+                  {connectTextWord}
+                </span>
+              ))}
+            </h4>
+          </a>
+        </div>
+        <button className="px-2 py-1 absolute top-[3rem]  right-[7rem] text-sm font-medium border-[1px] bg-violet hover:bg-violet/70 rounded-2xl font-circular-medium flex justify-center items-center">
           <span className="inline-block w-4 h-4 mr-2 bg-green-700 rounded-full"></span>
           Open for Opportunities
         </button>
-      </a>
+      </div>
       <div className="flex items-center justify-between w-full px-10 border-t-2 border-white py-14">
         <ul className="space-y-4 text-xl text-white font- font-circular-medium">
           <li className="flex items-center gap-5">
@@ -54,7 +69,7 @@ const Contact = ({ setLensHover }) => {
           </li>
         </ul>
       </div>
-    </div>
+    </section>
   );
 };
 
