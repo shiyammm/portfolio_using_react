@@ -7,7 +7,7 @@ import { ScrollTrigger } from 'gsap/all';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const About = () => {
+const About = ({ setEnterAboutPage }) => {
   const aboutRef = useRef();
 
   const Name = 'Hi, this is Shiyam Robert,';
@@ -22,6 +22,13 @@ const About = () => {
   const BasedWords = Based.split(' ');
 
   const ParagraphWords = ParagraphText.split(' ');
+
+  const handleEnterAbout = () => {
+    setEnterAboutPage(true);
+  };
+  const handleLeaveAbout = () => {
+    setEnterAboutPage(false);
+  };
 
   useGSAP(
     () => {
@@ -59,6 +66,8 @@ const About = () => {
     <section
       className="w-full h-screen text-black bg-violet rounded-[2rem] px-[9rem] flex flex-col justify-center"
       ref={aboutRef}
+      onMouseMove={handleEnterAbout}
+      onMouseLeave={handleLeaveAbout}
     >
       <div className="flex justify-between">
         <div>

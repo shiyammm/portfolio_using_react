@@ -9,7 +9,7 @@ import Magnet from '../components/Magnet';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Works = ({ cursor, setHoverLink, setHoverIcon }) => {
+const Works = ({ cursor, setHoverLink, setHoverIcon, setEnterWorksPage }) => {
   const slider = useRef();
   const component = useRef();
   const h2Ref = useRef();
@@ -77,6 +77,14 @@ const Works = ({ cursor, setHoverLink, setHoverIcon }) => {
     { scope: component },
   );
 
+  const handleEnterWorks = () => {
+    setEnterWorksPage(true);
+  };
+
+  const handleLeaveWorks = () => {
+    setEnterWorksPage(false);
+  };
+
   const handleHoverLinkEnter = () => {
     setHoverLink(true);
   };
@@ -84,13 +92,7 @@ const Works = ({ cursor, setHoverLink, setHoverIcon }) => {
   const handleHoverLinkLeave = () => {
     setHoverLink(false);
   };
-  const handleHoverTextEnter = () => {
-    setHoverText(true);
-  };
 
-  const handleHoverTextLeave = () => {
-    setHoverText(false);
-  };
   const handleHoverIconEnter = () => {
     setHoverIcon(true);
   };
@@ -100,7 +102,12 @@ const Works = ({ cursor, setHoverLink, setHoverIcon }) => {
   };
 
   return (
-    <section ref={component} className="overflow-hidden bg-[#121315]">
+    <section
+      ref={component}
+      className="overflow-hidden bg-[#121315]"
+      onMouseMove={handleEnterWorks}
+      onMouseLeave={handleLeaveWorks}
+    >
       <div ref={slider} className="flex h-screen w-fit flex-nowrap">
         <div className="flex items-center justify-center w-screen h-screen">
           <h2
