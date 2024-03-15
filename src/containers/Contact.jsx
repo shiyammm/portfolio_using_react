@@ -1,48 +1,44 @@
 import React from 'react';
 import { SiGithub } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+import { useParallax } from 'react-scroll-parallax';
 
-const Contact = ({ setLensHover, setEnterContactPage }) => {
-  const connectText = "Let's Connect →";
+const Contact = () => {
+  const { ref } = useParallax({ speed: -1 });
 
-  const connectTextWords = connectText.split('');
-
-  const handleLensEnter = () => {
-    setLensHover(true);
-  };
-  const handleLensLeave = () => {
-    setLensHover(false);
-  };
-
-  const handleCursorEnter = () => {
-    setEnterContactPage(true);
-  };
-  const handleCursorLeave = () => {
-    setEnterContactPage(false);
-  };
+  useGSAP(() => {
+    gsap.from('.tween', {
+      y: 100,
+      opacity: 0,
+      duration: 1.2,
+      scrollTrigger: {
+        trigger: '.contact',
+        start: 'top 50%',
+      },
+    });
+    gsap.from('.line', {
+      width: 0,
+      opacity: 0,
+      duration: 2.5,
+      scrollTrigger: {
+        trigger: '.contact',
+        start: 'top 50%',
+      },
+    });
+  });
 
   return (
-    <section
+    <footer
       className="relative flex items-end w-full h-screen px-14 rounded-t-3xl contact"
-      onMouseEnter={handleCursorEnter}
-      onMouseLeave={handleCursorLeave}
+      ref={ref}
     >
       <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[60rem] h-[20rem]">
         <div className="relative">
           <a href="mailto:shiyamrobert@gmail.com" className="">
-            <h4
-              className={`text-[7rem] font-neue-montreal text-white`}
-              onMouseEnter={handleLensEnter}
-              onMouseLeave={handleLensLeave}
-            >
-              {connectTextWords.map((connectTextWord, index) => (
-                <span
-                  key={index}
-                  className={`hover:text-[9rem] hover:text-bold transition ease-in-out delay-150`}
-                >
-                  {connectTextWord}
-                </span>
-              ))}
+            <h4 className={`text-[7rem] font-neue-montreal text-white tween`}>
+              <span className="">Let's Connect →</span>
             </h4>
           </a>
         </div>
@@ -51,7 +47,8 @@ const Contact = ({ setLensHover, setEnterContactPage }) => {
           Open for Opportunities
         </button>
       </div>
-      <div className="flex items-center justify-between w-full px-10 border-t-2 border-white py-14">
+      <div className="relative flex items-center justify-between w-full px-10 py-14">
+        <div className="absolute top-0 left-0 w-full h-[1px] line bg-white"></div>
         <ul className="space-y-4 text-xl text-white font- font-circular-medium">
           <li className="flex items-center gap-5">
             <a href="">Github</a>
@@ -69,7 +66,7 @@ const Contact = ({ setLensHover, setEnterContactPage }) => {
           </li>
         </ul>
       </div>
-    </section>
+    </footer>
   );
 };
 

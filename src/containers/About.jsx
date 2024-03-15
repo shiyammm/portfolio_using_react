@@ -4,10 +4,13 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 import { ScrollTrigger } from 'gsap/all';
+import { useParallax } from 'react-scroll-parallax';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = ({ setEnterAboutPage }) => {
+  const { ref } = useParallax({ speed: 20 });
+
   const aboutRef = useRef();
 
   const Name = 'Hi, this is Shiyam Robert,';
@@ -65,7 +68,11 @@ const About = ({ setEnterAboutPage }) => {
   return (
     <section
       className="w-full h-screen text-black bg-violet rounded-[2rem] px-[9rem] flex flex-col justify-center"
-      ref={aboutRef}
+      ref={(el) => {
+        // Assigning the element to both refs
+        aboutRef.current = el;
+        ref.current = el;
+      }}
       onMouseMove={handleEnterAbout}
       onMouseLeave={handleLeaveAbout}
     >

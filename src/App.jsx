@@ -8,19 +8,28 @@ import gsap from 'gsap';
 import Cursor from './components/Cursor';
 import { useGSAP } from '@gsap/react';
 import Contact from './containers/Contact';
+import Lenis from '@studio-freight/lenis';
+import { ParallaxProvider } from 'react-scroll-parallax';
 
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverIcon, setHoverIcon] = useState(false);
+  const [hoverNavLink, setHoverNavLink] = useState(false);
   const [enterAboutPage, setEnterAboutPage] = useState(false);
   const [enterWorksPage, setEnterWorksPage] = useState(false);
   const [enterSkillPage, setEnterSkillPage] = useState(false);
   const [hoverText, setHoverText] = useState(false);
-  const [enterContactPage, setEnterContactPage] = useState(false);
-  const [lensHover, setLensHover] = useState(false);
 
   const cursor = useRef();
-  const containerRef = useRef(null);
+
+  const lenis = new Lenis();
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
 
   useGSAP(() => {
     const mouse = (e) => {
@@ -33,41 +42,38 @@ const App = () => {
   });
 
   return (
-    <main className="relative bg-gray">
-      <Cursor
-        hoverLink={hoverLink}
-        hoverText={hoverText}
-        hoverIcon={hoverIcon}
-        lensHover={lensHover}
-        cursor={cursor}
-        enterAboutPage={enterAboutPage}
-        enterWorksPage={enterWorksPage}
-        enterSkillPage={enterSkillPage}
-        enterContactPage={enterContactPage}
-      />
-      <Navbar />
-      <Hero />
-      <About setEnterAboutPage={setEnterAboutPage} />
-      <Works
-        cursor={cursor}
-        hoverLink={hoverLink}
-        hoverText={hoverText}
-        setHoverText={setHoverText}
-        setHoverLink={setHoverLink}
-        hoverIcon={hoverIcon}
-        setHoverIcon={setHoverIcon}
-        setEnterWorksPage={setEnterWorksPage}
-      />
-      <WhatIUse
-        setHoverText={setHoverText}
-        setEnterSkillPage={setEnterSkillPage}
-      />
-      <Contact
-        lensHover={lensHover}
-        setLensHover={setLensHover}
-        setEnterContactPage={setEnterContactPage}
-      />
-    </main>
+    <ParallaxProvider>
+      <main className="relative bg-[#121315]">
+        <Cursor
+          hoverLink={hoverLink}
+          hoverText={hoverText}
+          hoverIcon={hoverIcon}
+          cursor={cursor}
+          enterAboutPage={enterAboutPage}
+          enterWorksPage={enterWorksPage}
+          enterSkillPage={enterSkillPage}
+          hoverNavLink={hoverNavLink}
+        />
+        <Navbar hoverNavLink={hoverNavLink} setHoverNavLink={setHoverNavLink} />
+        <Hero />
+        <About setEnterAboutPage={setEnterAboutPage} />
+        <Works
+          cursor={cursor}
+          hoverLink={hoverLink}
+          hoverText={hoverText}
+          setHoverText={setHoverText}
+          setHoverLink={setHoverLink}
+          hoverIcon={hoverIcon}
+          setHoverIcon={setHoverIcon}
+          setEnterWorksPage={setEnterWorksPage}
+        />
+        <WhatIUse
+          setHoverText={setHoverText}
+          setEnterSkillPage={setEnterSkillPage}
+        />
+        <Contact />
+      </main>
+    </ParallaxProvider>
   );
 };
 

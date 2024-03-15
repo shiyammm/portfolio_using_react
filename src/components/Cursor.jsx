@@ -5,29 +5,22 @@ const Cursor = ({
   hoverLink,
   hoverText,
   hoverIcon,
-  lensHover,
-  enterContactPage,
   enterSkillPage,
   enterAboutPage,
   enterWorksPage,
   cursor,
 }) => {
   return (
-    <div className={`fixed z-[100] ${hoverText && "z-[10]"} `} ref={cursor}>
+    <div className={`fixed z-[100] ${hoverText && 'z-[10]'} `} ref={cursor}>
       <div
         className={`fixed top-1/2 ${
           hoverLink && 'scale-[3] transition ease-in-out delay-150 bg-violet'
-        } ${
-          hoverText && 'scale-[6] bg-red-200 transition ease-in-out delay-150'
-        } ${
-          hoverIcon && 'scale-[1]  transition ease-in-out delay-150 bg-violet'
-        } ${
-          lensHover &&
-          'bg-transparent border-[3px] border-white transition ease-in-out delay-150 w-[20rem] h-[20rem]'
-        }  
+        } 
         ${
-          enterContactPage &&
-          'bg-transparent border-[1px] border-white transition ease-in-out lens delay-150'
+          hoverText && 'scale-[] bg-red-200 transition ease-in-out delay-150'
+        } 
+        ${
+          hoverIcon && 'scale-[1]  transition ease-in-out delay-150 bg-violet'
         } 
         ${enterSkillPage && 'bg-red-900 transition ease-in-out delay-150'}
 
