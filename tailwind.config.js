@@ -15,15 +15,8 @@ export default {
         'neue-montreal': ['neue-montreal', 'sans-serif'],
         'roslindale-display': ['roslindale-display', 'sans-serif'],
         gtApina: ['gtAlpina', 'sans-serif'],
-        'OverusedGrotesk-Bold': ['OverusedGrotesk-Bold', 'sans-serif'],
-        'OverusedGrotesk-VF': ['OverusedGrotesk-VF', 'sans-serif'],
-        'OverusedGrotesk-Medium': ['OverusedGrotesk-Medium', 'sans-serif'],
         'BebasNeue-Regular': ['BebasNeue-Regular', 'sans-serif'],
-        'MonumentExtended-Regular': ['MonumentExtended-Regular', 'sans-serif'],
-        'MonumentExtended-Ultrabold': [
-          'MonumentExtended-Ultrabold',
-          'sans-serif',
-        ],
+        'Canopee-Regular': ['Canopee-Regular', 'sans-serif'],
       },
       screens: {
         '2xl': { max: '1535px' },
