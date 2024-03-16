@@ -3,19 +3,16 @@ import { SiGithub } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useParallax } from 'react-scroll-parallax';
 
 const Contact = () => {
-  const { ref } = useParallax({ speed: -1 });
-
   useGSAP(() => {
     gsap.from('.tween', {
-      y: 100,
+      y: 10,
       opacity: 0,
-      duration: 1.2,
+      duration: 1,
       scrollTrigger: {
         trigger: '.contact',
-        start: 'top 50%',
+        start: 'top 20%',
       },
     });
     gsap.from('.line', {
@@ -24,21 +21,21 @@ const Contact = () => {
       duration: 2.5,
       scrollTrigger: {
         trigger: '.contact',
-        start: 'top 50%',
+        start: 'top 20%',
       },
     });
   });
 
   return (
-    <footer
-      className="relative flex items-end w-full h-screen px-14 rounded-t-3xl contact"
-      ref={ref}
-    >
-      <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[60rem] h-[20rem]">
+    <footer className="relative flex items-end w-full h-screen px-14 contact">
+      <div className="absolute flex items-center justify-center -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-[60rem] h-[20rem] tween">
         <div className="relative">
           <a href="mailto:shiyamrobert@gmail.com" className="">
-            <h4 className={`text-[7rem] font-neue-montreal text-white tween`}>
-              <span className="">Let's Connect →</span>
+            <h4 className="text-[7rem] font-neue-montreal text-white">
+              <span className="group">
+                Let's Connect{' '}
+                <span className="group-hover:translate-x-4">→</span>{' '}
+              </span>
             </h4>
           </a>
         </div>
