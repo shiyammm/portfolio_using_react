@@ -1,112 +1,114 @@
-import React, { useRef } from 'react';
-import Title from '../components/Title';
 import { skillsData } from '../../lib/data';
-import Magnet from '../components/Magnet';
+import { PiStarFourFill } from 'react-icons/pi';
+import { useEffect, useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
-const WhatIUse = ({ setHoverIcon }) => {
-  const magnetref = useRef(null);
+const WhatIUse = () => {
+  const skillTextRef = useRef();
+  const whatIUseRef = useRef();
 
-  const handleHoverIconEnter = () => {
-    setHoverIcon(true);
-  };
+  useGSAP(
+    () => {
+      gsap.from('.title', {
+        y: 70,
+        opacity: 0,
+        duration: 1,
+        scrollTrigger: {
+          trigger: whatIUseRef.current,
+          start: 'top 40%',
+        },
+      });
+    },
+    { scope: whatIUseRef },
+  );
 
-  const handleHoverIconLeave = () => {
-    setHoverIcon(false);
-  };
+  useEffect(() => {
+    let skillTextWidth = skillTextRef.current.offsetWidth;
+    let windowWidth = window.innerWidth;
+
+    let mouseX = 0;
+    let prevMouseX = 0;
+
+    let skewTarget = 0;
+    let translateTarget = 0;
+
+    let skewWithEasing = 0;
+    let translateWithEasing = 0;
+
+    let skewEasingFactor = 0.1;
+    let translateEasingFactor = 0.05;
+
+    const handleMouse = (e) => {
+      mouseX = e.pageX;
+    };
+
+    const handleWindowResize = (e) => {
+      skillTextWidth = skillTextRef.current.offsetWidth;
+      windowWidth = window.innerWidth;
+    };
+
+    const lerp = (start, end, factor) => {
+      return (1 - factor) * start + factor * end;
+    };
+
+    const animate = () => {
+      skewTarget = mouseX - prevMouseX;
+      prevMouseX = mouseX;
+
+      translateTarget =
+        ((skillTextWidth - windowWidth) / windowWidth) * mouseX * -1;
+
+      skewWithEasing = lerp(skewWithEasing, skewTarget, skewEasingFactor);
+
+      skewWithEasing = Math.min(Math.max(parseInt(skewWithEasing), -75), 75);
+
+      translateWithEasing = lerp(
+        translateWithEasing,
+        translateTarget,
+        translateEasingFactor,
+      );
+
+      skillTextRef.current.style.transform = `
+        translateX(${translateWithEasing}px)
+        skewX(${skewWithEasing}deg)
+      `;
+
+      window.requestAnimationFrame(animate);
+    };
+
+    window.requestAnimationFrame(animate);
+
+    window.addEventListener('mousemove', handleMouse);
+    window.addEventListener('resize', handleWindowResize);
+  });
 
   return (
-    <section className="relative flex flex-col items-center justify-center w-full h-screen text-slate-300">
-      <Title title="What I use" />
-      <div className="flex flex-col space-y-7 items-center justify-center mt-[12rem]">
-        <p className="text-center w-[45rem] text-2xl font-circular-book">
-          My toolkit comprises front-end essentials: HTML, CSS, and JavaScript,
-          with a focus on React.js and Next.js. Proficient in Tailwind and
-          Bootstrap for design, and adept in animation libraries like Framer
-          Motion and GSAP for user engagement. Skilled in Git and GitHub for
-          seamless project management.
+    <section
+      className="relative grid  w-full h-screen overflow-hidden bg-[#fff] py-14 rounded-3xl"
+      ref={whatIUseRef}
+    >
+      <div className="ml-[6rem] text-left text-black mt-[2rem] title">
+        <h4 className="text-[7rem] font-medium font-roslindale-display ">
+          My Skill Set{' '}
+        </h4>
+        <p className="text-[1.5rem] font-circular-book text-black/50 w-[40rem] mt-[1rem]">
+          Crafting Exceptional Web Experiences with an Array of Essential
+          Frontend Tools and Technologies to Deliver Engaging User Interactions
+          and Seamless Digital Journeys.{' '}
         </p>
-        <div className="flex gap-5 ">
-          <div className="flex flex-col w-[28rem] h-[28rem] items-center justify-center">
-            <div className="flex flex-col items-center justify-center p-4 w-96">
-              <h2 className="mb-8 text-xl font-circular-medium">Languages</h2>
-              <div className="flex gap-x-[5rem]">
-                {skillsData.languages.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div
-                      className="z-[100] hover:text-black transition ease-in-out delay-150"
-                      onMouseEnter={handleHoverIconEnter}
-                      onMouseLeave={handleHoverIconLeave}
-                    >
-                      <Magnet magnetref={magnetref}>
-                        {<skill.img className="w-12 h-12" />}
-                        <p className="mt-5 text-xl">{skill.name}</p>
-                      </Magnet>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 w-96">
-              <h2 className="mb-8 text-xl font-circular-medium">Frameworks</h2>
-              <div className="flex gap-x-[5rem]">
-                {skillsData.frameworks.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div
-                      className="z-[100] hover:text-black transition ease-in-out delay-150"
-                      onMouseEnter={handleHoverIconEnter}
-                      onMouseLeave={handleHoverIconLeave}
-                    >
-                      <Magnet magnetref={magnetref}>
-                        {<skill.img className="w-12 h-12" />}
-                        <p className="mt-5 text-xl">{skill.name}</p>
-                      </Magnet>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col  w-[28rem] h-[28rem] items-center justify-center">
-            <div className="flex flex-col items-center justify-center p-4 w-96">
-              <h2 className="mb-8 text-xl font-circular-medium">Styling</h2>
-              <div className="flex gap-x-[5rem]">
-                {skillsData.styling.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div
-                      className="z-[100] hover:text-black transition ease-in-out delay-150"
-                      onMouseEnter={handleHoverIconEnter}
-                      onMouseLeave={handleHoverIconLeave}
-                    >
-                      <Magnet magnetref={magnetref}>
-                        {<skill.img className="w-12 h-12" />}
-                        <p className="mt-5 text-xl">{skill.name}</p>
-                      </Magnet>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="flex flex-col items-center justify-center p-4 w-96">
-              <h2 className="mb-8 text-xl font-circular-medium">Animations</h2>
-              <div className="flex gap-x-[5rem]">
-                {skillsData.animations.map((skill, index) => (
-                  <div key={index} className="flex flex-col items-center">
-                    <div
-                      className="z-[100] hover:text-black transition ease-in-out delay-150"
-                      onMouseEnter={handleHoverIconEnter}
-                      onMouseLeave={handleHoverIconLeave}
-                    >
-                      <Magnet magnetref={magnetref}>
-                        {<skill.img className="w-12 h-12" />}
-                        <p className="mt-5 text-xl">{skill.name}</p>
-                      </Magnet>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+      </div>
+      <div className=" skill_container" ref={skillTextRef}>
+        <div className="flex flex-nowrap gap-[6rem] bg-violet font-Canopee-Regular skill_text uppercase p-7  font-medium text-black tracking-[0.6rem]">
+          {skillsData.map((skill, index) => (
+            <span
+              className=" flex items-center gap-[3rem] whitespace-nowrap text-[7rem] skill relative will-change-transform "
+              key={index}
+            >
+              <PiStarFourFill className="w-10 h-10 font-Canopee-Regular" />
+              {skill}
+            </span>
+          ))}
         </div>
       </div>
     </section>

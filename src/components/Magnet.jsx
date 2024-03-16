@@ -27,7 +27,6 @@ const Magnet = ({ children }) => {
       transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
       onMouseMove={mouseMove}
       onMouseLeave={mouseLeave}
-      className="py-2 text-lg font-medium tracking-[0.1rem] text-white border-2 rounded-3xl px-6 border-violet hover:bg-violet hover:text-black"
     >
       {children}
     </motion.div>

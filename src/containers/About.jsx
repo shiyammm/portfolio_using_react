@@ -8,7 +8,7 @@ import { useParallax } from 'react-scroll-parallax';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const About = ({ setEnterAboutPage }) => {
+const About = () => {
   const { ref } = useParallax({ speed: 20 });
 
   const aboutRef = useRef();
@@ -25,13 +25,6 @@ const About = ({ setEnterAboutPage }) => {
   const BasedWords = Based.split(' ');
 
   const ParagraphWords = ParagraphText.split(' ');
-
-  const handleEnterAbout = () => {
-    setEnterAboutPage(true);
-  };
-  const handleLeaveAbout = () => {
-    setEnterAboutPage(false);
-  };
 
   useGSAP(
     () => {
@@ -73,8 +66,6 @@ const About = ({ setEnterAboutPage }) => {
         aboutRef.current = el;
         ref.current = el;
       }}
-      onMouseMove={handleEnterAbout}
-      onMouseLeave={handleLeaveAbout}
     >
       <div className="flex justify-between">
         <div>

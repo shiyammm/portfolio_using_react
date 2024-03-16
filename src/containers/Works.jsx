@@ -5,11 +5,10 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
-import Magnet from '../components/Magnet';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Works = ({ cursor, setHoverLink, setHoverIcon, setEnterWorksPage }) => {
+const Works = ({ cursor, setHoverLink }) => {
   const slider = useRef();
   const component = useRef();
   const h2Ref = useRef();
@@ -77,14 +76,6 @@ const Works = ({ cursor, setHoverLink, setHoverIcon, setEnterWorksPage }) => {
     { scope: component },
   );
 
-  const handleEnterWorks = () => {
-    setEnterWorksPage(true);
-  };
-
-  const handleLeaveWorks = () => {
-    setEnterWorksPage(false);
-  };
-
   const handleHoverLinkEnter = () => {
     setHoverLink(true);
   };
@@ -93,21 +84,8 @@ const Works = ({ cursor, setHoverLink, setHoverIcon, setEnterWorksPage }) => {
     setHoverLink(false);
   };
 
-  const handleHoverIconEnter = () => {
-    setHoverIcon(true);
-  };
-
-  const handleHoverIconLeave = () => {
-    setHoverIcon(false);
-  };
-
   return (
-    <section
-      ref={component}
-      className="overflow-hidden bg-[#121315]"
-      onMouseMove={handleEnterWorks}
-      onMouseLeave={handleLeaveWorks}
-    >
+    <section ref={component} className="overflow-hidden bg-[#121315]">
       <div ref={slider} className="flex h-screen w-fit flex-nowrap">
         <div className="flex items-center justify-center w-screen h-screen">
           <h2
@@ -161,13 +139,10 @@ const Works = ({ cursor, setHoverLink, setHoverIcon, setEnterWorksPage }) => {
                 </h3>
                 <div className="space-x-[1rem] pt-[1rem]">
                   {project.tags.map((tech, index) => (
-                    <button
-                      key={index}
-                      className="z-[100]"
-                      onMouseEnter={handleHoverIconEnter}
-                      onMouseLeave={handleHoverIconLeave}
-                    >
-                      <Magnet>{tech}</Magnet>
+                    <button key={index} className="z-[200]">
+                      <span className="py-2 text-lg font-medium tracking-[0.1rem] text-white border-2 rounded-3xl px-6 border-violet hover:bg-violet hover:text-black z-[10]">
+                        {tech}
+                      </span>
                     </button>
                   ))}
                 </div>
