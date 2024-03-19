@@ -1,8 +1,10 @@
 import React from 'react';
 import Menu from '../components/Menu';
 import { useState } from 'react';
+import Magnet from '../components/Magnet';
 
-const Navbar = () => {
+const Navbar = ({ hoverNavLink, setHoverNavLink }) => {
+  // Add overlay
   const [toggle, setToggle] = useState(false);
 
   const handleMenu = () => {
@@ -10,14 +12,16 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed w-full backdrop-blur-lg h-[6rem] text-white z-[99] overflow-hidden">
+    <nav className="fixed h-[6rem] text-white z-[100] w-full">
       <div className="flex justify-between w-full mt-8 px-14">
-        <header className="font-roslindale-display text-4xl text-white z-[60]">
-          Shiyam
-        </header>
+        <Magnet>
+          <header className="text-3xl font-Canopee-Regular text-white  z-[60]">
+            Shiyam
+          </header>
+        </Magnet>
         <div
           onClick={handleMenu}
-          className=" relative flex items-center gap-4 z-[60] bg-violet px-5 py-1.5 text-black font-semibold active:border-none rounded-2xl text-2xl"
+          className=" relative flex items-center gap-4 z-[60] bg-violet px-5 py-1.5 text-black font-semibold active:border-none rounded-2xl text-2xl cursor-pointer"
         >
           <span className="mb-1">{`${toggle ? 'Close' : 'Menu'}`}</span>
           <svg width="40" height="40" viewBox="0 0 100 100">
@@ -36,7 +40,11 @@ const Navbar = () => {
           </svg>
         </div>
       </div>
-      <Menu toggle={toggle} />
+      <Menu
+        toggle={toggle}
+        hoverNavLink={hoverNavLink}
+        setHoverNavLink={setHoverNavLink}
+      />
     </nav>
   );
 };
