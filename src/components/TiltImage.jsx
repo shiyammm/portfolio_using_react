@@ -38,7 +38,7 @@ const TiltImage = ({ projectImage, index, setHoverLink }) => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-indigo-300 to-violet-300 w-[58rem] h-[41rem] relative rounded-[2rem]"
+      className="bg-gradient-to-br from-indigo-300 to-violet-300 min-w-[58rem] min-h-[41rem] relative rounded-[2rem] 2xl:min-w-[45rem] 2xl:min-h-[30.5rem]"
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -58,7 +58,7 @@ const TiltImage = ({ projectImage, index, setHoverLink }) => {
         }}
         key={index}
         alt=""
-        className={`w-[57rem] h-[40rem] object-cover rounded-[2rem] absolute inset-2 place-content-center ${
+        className={`min-w-[57rem] min-h-[40rem] 2xl:min-w-[38rem] 2xl:min-h-[30rem] object-cover rounded-[2rem] absolute 2xl:inset-1.5 inset-2 place-content-center ${
           index === 1 ? 'object-left' : index === 2 ? 'object-[40%]' : ''
         }`}
       />

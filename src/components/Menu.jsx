@@ -2,12 +2,19 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import React, { useEffect, useRef } from 'react';
 import { PiStarFourFill } from 'react-icons/pi';
+import { Link } from 'react-router-dom';
 
-const Menu = (props) => {
-  const toggle = props.toggle;
+const Menu = ({ toggle }) => {
   const tl = useRef();
   const menuRef = useRef();
   const linksRef = useRef();
+
+  const NavLink1 = 'Works';
+  const NavLink2 = 'Contact';
+  const NavLink3 = 'CV';
+  const NavLinkWords1 = NavLink1.split('');
+  const NavLinkWords2 = NavLink2.split('');
+  const NavLinkWords3 = NavLink3.split('');
 
   useGSAP(() => {
     tl.current = gsap.timeline({
@@ -43,21 +50,24 @@ const Menu = (props) => {
 
   return (
     <div
-      className="fixed top-0 flex flex-col items-center justify-center w-full h-screen bg-gray"
+      className="fixed top-0 flex-col flex-center w-full h-screen bg-black z-[300]"
       ref={menuRef}
     >
       <ul className="unordered font-roslindale-display text-[11rem] text-white text-center leading-[15rem]">
-        <li className="flex items-center justify-center text-center gap-14 list">
+        <li className="text-center cursor-pointer hover:text-violet flex-center gap-14 list">
           {' '}
-          <PiStarFourFill className="w-10 h-10 text-violet" /> Work
+          <PiStarFourFill className="w-10 h-10 text-violet" />
+          <a to="/works">Work</a>
         </li>
-        <li className="flex items-center justify-center text-center gap-14 list">
+        <li className="text-center cursor-pointer hover:text-violet flex-center gap-14 list">
           {' '}
-          <PiStarFourFill className="w-10 h-10 text-violet" /> Contact
+          <PiStarFourFill className="w-10 h-10 text-violet" />
+          <a to="/contact">Contact</a>
         </li>
-        <li className="flex items-center justify-center text-center gap-14 list">
+        <li className="text-center cursor-pointer hover:text-violet flex-center gap-14 list">
           {' '}
-          <PiStarFourFill className="w-10 h-10 text-violet" /> CV
+          <PiStarFourFill className="w-10 h-10 text-violet" />
+          <a to="/cv">CV</a>
         </li>
       </ul>
       <div

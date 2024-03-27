@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRef } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
+import { motion } from 'framer-motion';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Works = ({ cursor, setHoverLink }) => {
+  const [activeImg, setActiveImg] = useState();
   const slider = useRef();
   const component = useRef();
   const h2Ref = useRef();
 
-  const WorkHeadText1 = 'Digital Work';
-  const WorkHeadText2 = 'Presentation ';
+  const WorkHeadText1 = 'Digital';
+  const WorkHeadText2 = 'work';
+  const WorkHeadText3 = 'Presentation';
 
   const WorkHeadText1Words = WorkHeadText1.split('');
   const WorkHeadText2Words = WorkHeadText2.split('');
+  const WorkHeadText3Words = WorkHeadText3.split('');
   useGSAP(
     () => {
       /* window.innerWidth - to get the initial width of the screen
@@ -45,6 +49,8 @@ const Works = ({ cursor, setHoverLink }) => {
         invalidateOnRefresh: true,
         // markers: true,
       });
+
+      // gsap.to("")
 
       const tweenHead = gsap.from(['.headText1', '.headText2'], {
         y: -100,
@@ -84,74 +90,113 @@ const Works = ({ cursor, setHoverLink }) => {
     setHoverLink(false);
   };
 
+  const handleMouseClick = (i) => {
+    setActiveImg((prev) => (prev === i ? null : i));
+  };
+
   return (
-    <section ref={component} className="overflow-hidden bg-[#121315]">
-      <div ref={slider} className="flex h-screen w-fit flex-nowrap">
-        <div className="flex items-center justify-center w-screen h-screen">
-          <h2
-            className="text-[15rem] text-[#9b9d9a] uppercase font-BebasNeue-Regular font-medium leading-[13rem] tracking-[0.1rem] text-center"
-            ref={h2Ref}
-          >
-            {WorkHeadText1Words.map((WorkHeadText1Word, index) => (
-              <span key={index} className="inline-block headText1">
-                {WorkHeadText1Word}
-              </span>
-            ))}
-            <br />
-            {WorkHeadText2Words.map((WorkHeadText2Word, index) => (
-              <span
-                key={index}
-                className="text-[#eaeaea] inline-block headText2"
-              >
-                {WorkHeadText2Word}
-              </span>
-            ))}
-          </h2>
-        </div>
-        {projectsData.map((project, index) => (
-          <div
-            className="flex items-center justify-center w-screen h-screen space-x-[5rem] text-white"
-            key={index}
-          >
-            <a
-              href={`${project.link}`}
-              key={index}
-              className="relative"
-              target="blank"
-              onMouseEnter={handleHoverLinkEnter}
-              onMouseLeave={handleHoverLinkLeave}
+    <>
+      <section ref={component} className="overflow-hidden xl:hidden" id="works">
+        <div ref={slider} className="flex h-screen w-fit flex-nowrap ">
+          <div className="w-screen h-screen flex-center">
+            <h2
+              className="text-[15rem] 2xl:text-[10rem] text-[#9b9d9a] uppercase font-BebasNeue-Regular font-medium leading-[13rem] 2xl:leading-[9rem] tracking-[0.1rem] text-center"
+              ref={h2Ref}
             >
-              <TiltImage
-                projectImage={project.imageUrl}
-                projectLink={project.link}
-                setHoverLink={setHoverLink}
-                index={index}
-              />
-            </a>
-            <div className="h-[40rem] w-[30rem] flex flex-col gap-4 relative">
-              <div className="absolute top-[10rem]">
-                {/* Add vertical scroll effect */}
-                <span className="text-[9rem] font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
-                  {String(index + 1).padStart(2, '0')}
+              {WorkHeadText1Words.map((WorkHeadText1Word, index) => (
+                <span key={index} className="inline-block headText1">
+                  {WorkHeadText1Word}
                 </span>
-                <h3 className="text-[4rem] font-medium font-BebasNeue-Regular text-white">
-                  {project.title}
-                </h3>
-                <div className="space-x-[1rem] pt-[1rem]">
-                  {project.tags.map((tech, index) => (
-                    <button key={index} className="z-[200]">
-                      <span className="py-2 text-lg font-medium tracking-[0.1rem] text-white border-2 rounded-3xl px-6 border-violet hover:bg-violet hover:text-black z-[10]">
-                        {tech}
-                      </span>
-                    </button>
-                  ))}
+              ))}{' '}
+              {WorkHeadText2Words.map((WorkHeadText2Word, index) => (
+                <span key={index} className="inline-block headText1">
+                  {WorkHeadText2Word}
+                </span>
+              ))}
+              <br />
+              {WorkHeadText3Words.map((WorkHeadText3Word, index) => (
+                <span
+                  key={index}
+                  className="text-[#eaeaea] inline-block headText2"
+                >
+                  {WorkHeadText3Word}
+                </span>
+              ))}
+            </h2>
+          </div>
+          {projectsData.map((project, index) => (
+            <div
+              className="flex-center w-screen h-screen space-x-[5rem] text-white"
+              key={index}
+            >
+              <a
+                href={`${project.link}`}
+                key={index}
+                className="relative image"
+                target="blank"
+                onMouseEnter={handleHoverLinkEnter}
+                onMouseLeave={handleHoverLinkLeave}
+              >
+                <TiltImage
+                  projectImage={project.imageUrl}
+                  projectLink={project.link}
+                  setHoverLink={setHoverLink}
+                  index={index}
+                />
+              </a>
+              <div className="h-[40rem] w-[30rem] flex flex-col gap-4 relative">
+                <div className="absolute bottom-[5rem]">
+                  <span className="text-[9rem] 2xl:text-[6rem] font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <h3 className="text-[4rem] 2xl:text-[3rem] font-medium font-BebasNeue-Regular text-white">
+                    {project.title}
+                  </h3>
+                  <div className="space-x-[1rem] pt-[1rem]">
+                    {project.tags.map((tech, index) => (
+                      <button key={index} className="">
+                        <motion.span className="py-2 text-lg 2xl:text-md font-medium tracking-[0.1rem] text-white border-[1px] rounded-2xl px-6 2xl:px-4">
+                          {tech}
+                        </motion.span>
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+      <section className="relative items-center justify-center hidden w-full h-screen text-white xl:flex">
+        <h1 className="absolute text-[3.5rem] text-white top-10 font-roslindale-display">
+          Works
+        </h1>
+        <div className="mt-20 space-y-4">
+          {projectsData.map((project, i) => (
+            <div
+              key={i}
+              className="relative overflow-hidden rounded-2xl"
+              onClick={() => handleMouseClick(i)}
+            >
+              <img
+                className={`h-24 w-[50rem] object-cover  ${
+                  activeImg === i
+                    ? 'h-[25rem] transition-all object-center '
+                    : ''
+                } `}
+                src={project.imageUrl}
+                alt={project.title}
+              />
+              <div className="absolute flex items-center justify-center w-full h-full -translate-x-1/2 -translate-y-1/2 bg-black shadow-sm opacity-50 top-1/2 left-1/2">
+                <span className="text-xl font-medium font-neue-montreal">
+                  {project.title}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 };
 
