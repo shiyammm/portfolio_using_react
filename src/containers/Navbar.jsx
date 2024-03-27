@@ -1,51 +1,124 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
 import { useState } from 'react';
 import Magnet from '../components/Magnet';
+import { MotionConfig, motion, easeInOut } from 'framer-motion';
 
-const Navbar = ({ hoverNavLink, setHoverNavLink }) => {
-  // Add overlay
+const Navbar = ({ hoverNavLink, setHoverNavLink, navLoaderRef }) => {
   const [toggle, setToggle] = useState(false);
 
-  const handleMenu = () => {
-    setToggle(!toggle);
+  const navRef = useRef();
+
+  let lastScroll = 0;
+
+  const handleScroll = () => {
+    let scrollY = document.documentElement.scrollTop;
+    if (scrollY - 5 > lastScroll) {
+      navRef.current.style.top = '-95px';
+    } else {
+      navRef.current.style.top = '0px';
+    }
+    lastScroll = scrollY - 5;
   };
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="fixed h-[6rem] text-white z-[100] w-full">
-      <div className="flex justify-between w-full mt-8 px-14">
+    <header
+      className="fixed w-full text-white z-[200] top-0 transition-all"
+      ref={navRef}
+    >
+      <nav className="flex items-center justify-between w-full pt-6 px-14" ref={navLoaderRef} >
         <Magnet>
-          <header className="text-3xl font-Canopee-Regular text-white  z-[60]">
-            Shiyam
-          </header>
+          <div className="text-[2rem] font-Canopee-Regular text-white z-[90]">
+            Shiyam Robert
+          </div>
         </Magnet>
-        <div
-          onClick={handleMenu}
-          className=" relative flex items-center gap-4 z-[60] bg-violet px-5 py-1.5 text-black font-semibold active:border-none rounded-2xl text-2xl cursor-pointer"
+        <MotionConfig
+          transition={{
+            duration: 0.5,
+            ease: easeInOut,
+          }}
         >
-          <span className="mb-1">{`${toggle ? 'Close' : 'Menu'}`}</span>
-          <svg width="40" height="40" viewBox="0 0 100 100">
-            <path
-              className={`line line1 ${toggle && 'opened-line1'}`}
-              d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058"
+          <motion.button
+            initial={false}
+            animate={toggle ? 'open' : 'close'}
+            className={`relative z-[500] active:border-none rounded-full text-2xl cursor-pointer w-16 h-16 bg-white/30 backdrop-blur`}
+            onClick={() => setToggle((prev) => !prev)}
+          >
+            <motion.span
+              style={{ left: '50%', top: '30%', x: '-50%', y: '-50%' }}
+              className="absolute h-[3px] bg-white w-7"
+              variants={{
+                open: {
+                  rotate: ['0deg', '0deg', '45deg'],
+                  top: ['33%', '33%', '50%'],
+                },
+                close: {
+                  rotate: ['45deg', '0deg', '0deg'],
+                  top: ['50%', '50%', '33%'],
+                },
+              }}
             />
-            <path
-              className={`line line2 ${toggle && 'opened-line2'}`}
-              d="M 20,50 H 80"
+            <motion.span
+              style={{
+                left: 'calc(50% + 4px)',
+                top: '50%',
+                x: '-50%',
+                y: '-50%',
+                width: '20px',
+              }}
+              className="absolute h-[3px] bg-white"
+              variants={{
+                open: {
+                  rotate: ['0deg', '0deg', '-45deg'],
+                  width: '28px',
+                  left: '50%',
+                },
+                close: {
+                  rotate: ['-45deg', '0deg', '0deg'],
+                  width: '20px',
+                  left: 'calc(50% + 4px)',
+                },
+              }}
             />
-            <path
-              className={`line line3 ${toggle && 'opened-line3'}`}
-              d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942"
+            <motion.span
+              style={{
+                left: 'calc(50% + 7px)',
+                bottom: '25%',
+                x: '-50%',
+                y: '-50%',
+              }}
+              className="w-3.5 h-[3px] bg-white absolute"
+              variants={{
+                open: {
+                  rotate: ['0deg', '0deg', '45deg'],
+                  bottom: ['27%', '27%', '50%'],
+                  left: '45%',
+                },
+                close: {
+                  rotate: ['45deg', '0deg', '0deg'],
+                  bottom: ['50%', '50%', '27%'],
+                  left: 'calc(50% + 7px)',
+                },
+              }}
             />
-          </svg>
-        </div>
+          </motion.button>
+        </MotionConfig>
+      </nav>
+      <div className="relative">
+        <Menu
+          toggle={toggle}
+          hoverNavLink={hoverNavLink}
+          setHoverNavLink={setHoverNavLink}
+        />
       </div>
-      <Menu
-        toggle={toggle}
-        hoverNavLink={hoverNavLink}
-        setHoverNavLink={setHoverNavLink}
-      />
-    </nav>
+    </header>
   );
 };
 
