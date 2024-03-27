@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import Lenis from '@studio-freight/lenis';
-import { ParallaxProvider } from 'react-scroll-parallax';
 import { useGSAP } from '@gsap/react';
 import {
   Navbar,
@@ -11,34 +10,22 @@ import {
   Works,
   WhatIUse,
   Contact,
+  Loader,
 } from './constants/index';
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  animate,
-} from 'framer-motion';
+import { motion, useMotionTemplate } from 'framer-motion';
 
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverNavLink, setHoverNavLink] = useState(false);
+  const tl1 = useRef();
+  const loaderRefs = {
+    loader1: useRef(null),
+    loader2: useRef(null),
+    loader3: useRef(null),
+  };
+  const navLoaderRef = useRef();
 
-  const bgColors = ['#13FFAA', '#1E67C6', '#CE84CF', '#DD335C'];
-
-  const color = useMotionValue(bgColors[0]);
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 100%, black 60% ,${color})`;
-  const backgroundColor = useMotionTemplate`${color}`;
-  const border = useMotionTemplate`1px solid ${color}`;
-  const boxShadow = useMotionTemplate`0px 4px 24px ${color}`;
-
-  useEffect(() => {
-    animate(color, bgColors, {
-      ease: 'easeInOut',
-      duration: 10,
-      repeat: Infinity,
-      repeatType: 'mirror',
-    });
-  });
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 100%, #121315 60% ,#37EBA9)`;
 
   const cursor = useRef();
 
@@ -62,9 +49,26 @@ const App = () => {
   });
 
   return (
-    <ParallaxProvider>
-      <main className="relative bg-black">
-        <div>
+    <>
+      <main className="relative">
+        <div className="relative bg-[#121315]">
+          <div id="loader" className="z-[900] w-full absolute  text-white ">
+            <div
+              id="loader1"
+              className="w-full h-screen bg-cyan"
+              ref={loaderRefs.loader1}
+            ></div>
+            <div
+              id="loader2"
+              className=" bg-[#121315] w-full h-screen"
+              ref={loaderRefs.loader2}
+            ></div>
+            <div
+              id="loader3"
+              className="w-full h-screen bg-cyan"
+              ref={loaderRefs.loader3}
+            ></div>
+          </div>
           <Cursor
             hoverLink={hoverLink}
             cursor={cursor}
@@ -73,9 +77,14 @@ const App = () => {
           <Navbar
             hoverNavLink={hoverNavLink}
             setHoverNavLink={setHoverNavLink}
-            backgroundColor={backgroundColor}
+            navLoaderRef={navLoaderRef}
           />
-          <Hero backgroundColor={backgroundColor} backgroundImage={backgroundImage} />
+          <Hero
+            backgroundImage={backgroundImage}
+            tl1={tl1}
+            loaderRefs={loaderRefs}
+            navLoaderRef={navLoaderRef}
+          />
           <motion.div
             style={{
               backgroundImage,
@@ -93,7 +102,7 @@ const App = () => {
           <Contact />
         </div>
       </main>
-    </ParallaxProvider>
+    </>
   );
 };
 

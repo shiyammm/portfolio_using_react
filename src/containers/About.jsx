@@ -1,16 +1,12 @@
-import Title from '../components/Title';
 import React from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useRef } from 'react';
 import { ScrollTrigger } from 'gsap/all';
-import { useParallax } from 'react-scroll-parallax';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
-  const { ref } = useParallax({ speed: 20 });
-
   const aboutRef = useRef();
 
   const Name = 'Hi, this is Shiyam Robert,';
@@ -60,16 +56,15 @@ const About = () => {
 
   return (
     <section
-      className="w-full h-screen text-black bg-violet rounded-[2rem] px-[9rem] flex flex-col justify-center"
+      className="w-full h-screen text-white/70 bg-[#121315] rounded-[2rem] px-[9rem] flex flex-col justify-center about"
       ref={(el) => {
-        // Assigning the element to both refs
         aboutRef.current = el;
-        ref.current = el;
+        // ref.current = el;
       }}
     >
       <div className="flex justify-between">
         <div>
-          <h2 className="text-left text-[2.1rem] leading-[5rem] font-neue-montreal pb-[0.5rem]">
+          <h2 className="text-left text-[2.1rem] xl:text-[1.7rem] leading-[5rem] font-neue-montreal pb-[0.5rem] about-head">
             {NameWords.map((nameWord, index) => (
               <span key={index} className="inline-block word mr-2.5">
                 {nameWord}
@@ -78,7 +73,7 @@ const About = () => {
           </h2>
         </div>
         <div>
-          <h2 className="text-left text-[2rem] leading-[5rem] font-neue-montreal">
+          <h2 className="text-left text-[2.1rem] xl:text-[1.7rem] leading-[5rem] font-neue-montreal about-head">
             {BasedWords.map((basedWord, index) => (
               <span key={index} className="inline-block mr-2.5 word">
                 {basedWord}
@@ -87,9 +82,9 @@ const About = () => {
           </h2>
         </div>
       </div>
-      <div className="w-full h-[2px] bg-black paragraphDiv"></div>
+      <div className="w-full h-[2px] bg-white/70 paragraphDiv"></div>
       <div className="">
-        <p className="text-left text-[3.2rem] leading-[5rem] font-neue-montreal pt-[1rem]">
+        <p className="text-left text-[2rem] xl:text-[1.5rem] leading-[5rem] xl:leading-[3rem] font-neue-montreal pt-[1rem] about-para">
           {ParagraphWords.map((ParagraphWord, index) => (
             <span key={index} className="inline-block mr-3 word">
               {ParagraphWord}
