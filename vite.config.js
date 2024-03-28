@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['@react-three/fiber', '@react-three/drei'],
+      external: ['@react-three/fiber', '@react-three/drei', 'react-router-dom'],
     },
   },
 });
