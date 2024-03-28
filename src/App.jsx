@@ -11,7 +11,6 @@ import {
   WhatIUse,
   Contact,
 } from './constants/index';
-import { motion, useMotionTemplate } from 'framer-motion';
 
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
@@ -47,7 +46,7 @@ const App = () => {
 
   return (
     <>
-      <main className="relative">
+      <main className="relative overflow-hidden">
         <div className="relative bg-[#121315]">
           <div id="loader" className="z-[900] w-full absolute  text-white ">
             <div

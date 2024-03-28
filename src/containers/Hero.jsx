@@ -70,18 +70,58 @@ const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
         </Canvas>
       </div>
       <div id="heroText">
-        <h1 className="leading-[8rem] text-[7rem] 2xl:text-[6.5rem] xl:text-[6rem] xl:leading-[rem]  text-white tracking-wider font-Canopee-Regular">
-          <span className="w-full h-full gap-6 text-white flex-center">
-            <span className="word-1">Let's</span>{' '}
-            <span className="word-2">Create</span>
+        <h1
+          className="tracking-wider text-center font-Canopee-Regular"
+          style={{
+            lineHeight: 'calc(2rem + 3vw)',
+          }}
+        >
+          <span
+            className="text-white word-1 "
+            style={{
+              fontSize: 'calc(2rem + 4vw)',
+              marginRight: 'calc(1rem + 0.5vw)',
+            }}
+          >
+            Let's
           </span>
-
-          <span className="w-full h-full gap-6 flex-center text-cyan">
-            <span className="word-3">Awesome</span>
-            <span className="text-white word-4">Work! </span>
+          {'  '}
+          <span
+            className="text-white word-2 "
+            style={{
+              fontSize: 'calc(2rem + 4vw)',
+              marginRight: 'calc(1rem + 0.5vw)',
+            }}
+          >
+            Create
+          </span>
+          <br />
+          <span
+            className=" word-3 text-cyan"
+            style={{
+              fontSize: 'calc(2rem + 4vw)',
+              marginRight: 'calc(1rem + 0.5vw)',
+            }}
+          >
+            Awesome
+          </span>
+          <span
+            className="text-white word-4 "
+            style={{
+              fontSize: 'calc(2rem + 4vw)',
+              marginRight: 'calc(1rem + 0.5vw)',
+            }}
+          >
+            Work!{' '}
           </span>
         </h1>
-        <span className="text-[1.5rem] font-circular-book flex justify-center mt-5 text-white secondPara">
+        <span
+          className="flex justify-center mt-5 text-white font-circular-book secondPara"
+          style={{
+            fontSize: 'calc(0.5rem + 1vw)',
+            marginTop: 'calc(0.3rem + 0.5vw)',
+          }}
+        >
           Innovating Solutions, Igniting Progress
         </span>
       </div>

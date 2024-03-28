@@ -5,7 +5,7 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
-import { motion } from 'framer-motion';
+import { FiExternalLink } from 'react-icons/fi';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -155,9 +155,9 @@ const Works = ({ cursor, setHoverLink }) => {
                   <div className="space-x-[1rem] pt-[1rem]">
                     {project.tags.map((tech, index) => (
                       <button key={index} className="">
-                        <motion.span className="py-2 text-lg 2xl:text-md font-medium tracking-[0.1rem] text-white border-[1px] rounded-2xl px-6 2xl:px-4">
+                        <span className="py-2 text-lg 2xl:text-md font-medium tracking-[0.1rem] text-white border-[1px] rounded-2xl px-6 2xl:px-4">
                           {tech}
-                        </motion.span>
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -168,7 +168,7 @@ const Works = ({ cursor, setHoverLink }) => {
         </div>
       </section>
       <section className="relative items-center justify-center hidden w-full h-screen text-white xl:flex">
-        <h1 className="absolute text-[3.5rem] text-white top-10 font-roslindale-display">
+        <h1 className="absolute text-[3.5rem] text-white top-10 font-Canopee-Regular">
           Works
         </h1>
         <div className="mt-20 space-y-4">
@@ -181,16 +181,58 @@ const Works = ({ cursor, setHoverLink }) => {
               <img
                 className={`h-24 w-[50rem] object-cover  ${
                   activeImg === i
-                    ? 'h-[25rem] transition-all object-center '
+                    ? 'h-[25rem] transition-all object-center overflow-hidden'
                     : ''
                 } `}
                 src={project.imageUrl}
                 alt={project.title}
               />
-              <div className="absolute flex items-center justify-center w-full h-full -translate-x-1/2 -translate-y-1/2 bg-black shadow-sm opacity-50 top-1/2 left-1/2">
-                <span className="text-xl font-medium font-neue-montreal">
-                  {project.title}
-                </span>
+              <div
+                className={`absolute flex  w-full h-full -translate-x-1/2 -translate-y-1/2 shadow-sm rounded-2xl bg-black/80 top-1/2 left-1/2 ${
+                  activeImg === i
+                    ? 'bg-black/10 justify-start items-end'
+                    : 'items-center justify-center'
+                }`}
+              >
+                <div
+                  className={`flex w-full h-44 bg-black/50 flex-col space-y-6 ${
+                    activeImg === i
+                      ? 'justify-start items-start p-10'
+                      : 'justify-center items-center'
+                  } `}
+                >
+                  <span
+                    className={`text-xl font-semibold tracking-wide text-left text-white opacity-100 font-neue-montreal ${
+                      activeImg === i ? 'hidden' : 'block'
+                    } `}
+                  >
+                    {project.title}
+                  </span>
+                  <span
+                    className={`text-xl font-semibold tracking-wide text-left text-white opacity-100 font-neue-montreal  ${
+                      activeImg === i ? 'flex items-center gap-5' : 'hidden'
+                    } `}
+                  >
+                    {project.title}
+                    <a href={project.link} target="_blank">
+                      <FiExternalLink />
+                    </a>
+                  </span>
+
+                  <span
+                    className={`${
+                      activeImg == i ? 'block' : 'hidden '
+                    } text-sm font-neue-montreal flex gap-4`}
+                  >
+                    {project.tags.map((tech, index) => (
+                      <button key={index} className="">
+                        <span className="py-2 text-lg font-medium tracking-wider">
+                          {tech}
+                        </span>
+                      </button>
+                    ))}
+                  </span>
+                </div>
               </div>
             </div>
           ))}
