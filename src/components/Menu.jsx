@@ -2,7 +2,6 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { PiStarFourFill } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
 import { MotionConfig, motion, easeInOut } from 'framer-motion';
 import { SiGithub } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa';
