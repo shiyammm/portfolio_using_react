@@ -10,7 +10,6 @@ import {
   Works,
   WhatIUse,
   Contact,
-  Loader,
 } from './constants/index';
 import { motion, useMotionTemplate } from 'framer-motion';
 
@@ -24,8 +23,6 @@ const App = () => {
     loader3: useRef(null),
   };
   const navLoaderRef = useRef();
-
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 100%, #121315 60% ,#37EBA9)`;
 
   const cursor = useRef();
 
@@ -79,20 +76,16 @@ const App = () => {
             setHoverNavLink={setHoverNavLink}
             navLoaderRef={navLoaderRef}
           />
-          <Hero
-            backgroundImage={backgroundImage}
-            tl1={tl1}
-            loaderRefs={loaderRefs}
-            navLoaderRef={navLoaderRef}
-          />
-          <motion.div
+          <Hero tl1={tl1} loaderRefs={loaderRefs} navLoaderRef={navLoaderRef} />
+          <div
             style={{
-              backgroundImage,
+              backgroundImage:
+                'radial-gradient(125% 125% at 50% 100%, #121315 60% ,#00ffa2)',
             }}
             className="px-12"
           >
             <About />
-          </motion.div>
+          </div>
           <Works
             cursor={cursor}
             hoverLink={hoverLink}
