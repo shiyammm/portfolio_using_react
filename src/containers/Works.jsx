@@ -14,6 +14,8 @@ const Works = ({ cursor, setHoverLink }) => {
   const slider = useRef();
   const component = useRef();
   const h2Ref = useRef();
+  const projectsSmallScreenDiv = useRef();
+  const tl3 = useRef();
 
   const WorkHeadText1 = 'Digital';
   const WorkHeadText2 = 'work';
@@ -82,6 +84,46 @@ const Works = ({ cursor, setHoverLink }) => {
     { scope: component },
   );
 
+  useGSAP(
+    () => {
+      tl3.current = gsap
+        .timeline()
+        .from('#project-1', {
+          x: -500,
+          opacity: 0,
+          duration: 1,
+          ease: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+        })
+        .from('#project-2', {
+          x: 500,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+        })
+        .from('#project-3', {
+          x: -500,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+        })
+        .from('#project-4', {
+          x: 500,
+          opacity: 0,
+          duration: 0.5,
+          ease: 'cubic-bezier(0.68, -0.6, 0.32, 1.6)',
+        });
+
+      ScrollTrigger.create({
+        trigger: projectsSmallScreenDiv.current,
+        // markers: true,
+        start: 'top 20%',
+        end: 'top 90%',
+        animation: tl3.current,
+      });
+    },
+    { scope: projectsSmallScreenDiv },
+  );
+
   const handleHoverLinkEnter = () => {
     setHoverLink(true);
   };
@@ -89,7 +131,6 @@ const Works = ({ cursor, setHoverLink }) => {
   const handleHoverLinkLeave = () => {
     setHoverLink(false);
   };
-
   const handleMouseClick = (i) => {
     setActiveImg((prev) => (prev === i ? null : i));
   };
@@ -100,7 +141,11 @@ const Works = ({ cursor, setHoverLink }) => {
         <div ref={slider} className="flex h-screen w-fit flex-nowrap ">
           <div className="w-screen h-screen flex-center">
             <h2
-              className="text-[15rem] 2xl:text-[10rem] text-[#9b9d9a] uppercase font-BebasNeue-Regular font-medium leading-[13rem] 2xl:leading-[9rem] tracking-[0.1rem] text-center"
+              style={{
+                fontSize: 'calc(6.8rem + 6.8vw)',
+                lineHeight: 'calc(6rem + 6vw)',
+              }}
+              className=" text-[#9b9d9a] uppercase font-BebasNeue-Regular font-medium tracking-[0.1rem] text-center"
               ref={h2Ref}
             >
               {WorkHeadText1Words.map((WorkHeadText1Word, index) => (
@@ -144,12 +189,24 @@ const Works = ({ cursor, setHoverLink }) => {
                   index={index}
                 />
               </a>
-              <div className="h-[40rem] w-[30rem] flex flex-col gap-4 relative">
+              <div
+                style={{
+                  width: 'calc(14.5rem + 14.5vw)',
+                  height: 'calc(17.5rem + 17.5vw)',
+                }}
+                className="h-[40rem] flex flex-col gap-4 relative"
+              >
                 <div className="absolute bottom-[5rem]">
-                  <span className="text-[9rem] 2xl:text-[6rem] font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]">
+                  <span
+                    style={{ fontSize: 'calc(4rem + 4vw)' }}
+                    className="font-bold font-BebasNeue-Regular text-[#9b9d9a] leading-[7rem]"
+                  >
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <h3 className="text-[4rem] 2xl:text-[3rem] font-medium font-BebasNeue-Regular text-white">
+                  <h3
+                    style={{ fontSize: 'calc(1.8rem + 1.8vw)' }}
+                    className="font-medium text-white font-BebasNeue-Regular"
+                  >
                     {project.title}
                   </h3>
                   <div className="space-x-[1rem] pt-[1rem]">
@@ -167,28 +224,41 @@ const Works = ({ cursor, setHoverLink }) => {
           ))}
         </div>
       </section>
-      <section className="relative items-center justify-center hidden w-full h-screen text-white xl:flex">
-        <h1 className="absolute text-[3.5rem] text-white top-10 font-Canopee-Regular">
+      <section
+        className="relative items-center justify-center hidden w-full h-screen px-6 text-white xl:flex"
+        ref={projectsSmallScreenDiv}
+      >
+        <h1
+          style={{
+            fontSize: 'calc(2.5rem + 2.5vw)',
+          }}
+          className="absolute text-white top-2 font-Canopee-Regular"
+        >
           Works
         </h1>
         <div className="mt-20 space-y-4">
           {projectsData.map((project, i) => (
             <div
               key={i}
-              className="relative overflow-hidden rounded-2xl"
+              className="relative overflow-hidden rounded-2xl project-div"
+              id={`project-${i + 1}`}
               onClick={() => handleMouseClick(i)}
             >
               <img
-                className={`h-24 w-[50rem] object-cover  ${
+                style={{
+                  width: 'calc(25.5rem + 25.5vw)',
+                }}
+                className={`object-cover h-[6rem] ${
                   activeImg === i
-                    ? 'h-[25rem] transition-all object-center overflow-hidden'
+                    ? 'h-[25rem]  transition-all object-center overflow-hidden'
                     : ''
                 } `}
+                id={`img-${i + 1}`}
                 src={project.imageUrl}
                 alt={project.title}
               />
               <div
-                className={`absolute flex  w-full h-full -translate-x-1/2 -translate-y-1/2 shadow-sm rounded-2xl bg-black/80 top-1/2 left-1/2 ${
+                className={`absolute flex  w-full h-full -translate-x-1/2 -translate-y-1/2 shadow-sm rounded-2xl bg-black/10 top-1/2 left-1/2 ${
                   activeImg === i
                     ? 'bg-black/10 justify-start items-end'
                     : 'items-center justify-center'
