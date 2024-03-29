@@ -123,21 +123,21 @@ const WhatIUse = () => {
       className=" w-full h-screen space-y-[8rem] overflow-hidden py-14"
       ref={skillRef}
     >
-      <div className="text-left text-white mt-[2rem] flex items-center justify-center title flex-col space-y-9">
-        <p className="text-[3rem] text-center w-[80rem] font-roslindale-display text-white/50  mt-[1rem] text-div px-10 xl:text-[2.5rem] xl:w-[50rem] lg:text-[1.5rem]">
+      <div className="text-left text-white mt-[2rem] flex items-center justify-center title flex-col space-y-9 ">
+        <p className="text-[3rem] text-center  font-roslindale-display text-white/50  mt-[1rem] text-div px-10 skill-para">
           {ParagraphWords.map((ParagraphWord, index) => (
             <span key={index} className="inline-block mr-3 word">
               {ParagraphWord}
             </span>
           ))}
         </p>
-        <span className="flex items-center gap-3 text-white/50 font-circular-book options">
+        <span className="flex items-center gap-3 text-white/50 font-circular-book options lg:hidden">
           <span className="arrow-left"> ← </span>
           Move your Cursor
           <span className="arrow-right"> → </span>
         </span>
       </div>
-      <div className="relative grid w-full" ref={sliderRef}>
+      <div className="relative grid w-full lg:hidden " ref={sliderRef}>
         <div className="skill_container" ref={skillTextRef}>
           <div className="flex flex-nowrap gap-[6rem] bg-violet font-Canopee-Regular skill_text uppercase p-7 2xl:p-4 xl:p-2 font-medium text-black tracking-[0.6rem] xl:mt-[3rem]">
             {skillsData.map((skill, index) => (
@@ -152,6 +152,7 @@ const WhatIUse = () => {
           </div>
         </div>
       </div>
+      <div></div>
     </section>
   );
 };

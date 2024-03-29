@@ -38,12 +38,14 @@ const TiltImage = ({ projectImage, index, setHoverLink }) => {
 
   return (
     <motion.div
-      className="bg-gradient-to-br from-indigo-300 to-violet-300 min-w-[58rem] min-h-[41rem] relative rounded-[2rem] 2xl:min-w-[45rem] 2xl:min-h-[30.5rem]"
+      className="bg-gradient-to-br from-indigo-300 to-violet-300 w-[60rem] h-[40rem] relative rounded-[2rem]"
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       style={{
         transformStyle: 'preserve-3d',
+        width: 'calc(27.3rem + 27.3vw)',
+        height: 'calc(18.4rem + 18.4vw)',
       }}
       animate={{
         rotateX,
@@ -55,10 +57,12 @@ const TiltImage = ({ projectImage, index, setHoverLink }) => {
         style={{
           transform: 'translateZ(75px)',
           transformStyle: 'preserve-3d',
+          width: 'calc(26.8rem + 26.8vw)',
+          height: 'calc(17.9rem + 17.9vw)',
         }}
         key={index}
         alt=""
-        className={`min-w-[57rem] min-h-[40rem] 2xl:min-w-[38rem] 2xl:min-h-[30rem] object-cover rounded-[2rem] absolute 2xl:inset-1.5 inset-2 place-content-center ${
+        className={`w-[59rem] h-[39rem] object-cover rounded-[2rem] absolute inset-2 place-content-center ${
           index === 1 ? 'object-left' : index === 2 ? 'object-[40%]' : ''
         }`}
       />

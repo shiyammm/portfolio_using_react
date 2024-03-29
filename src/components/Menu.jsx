@@ -33,8 +33,9 @@ const Menu = () => {
           reversed: true,
         })
         .from(menuRef.current, {
-          right: '5rem',
-          top: '2rem',
+          right: '0rem',
+          top: '0rem',
+          bottom: '0rem',
           width: '0rem',
           height: '0rem',
           duration: 0.3,
@@ -61,6 +62,32 @@ const Menu = () => {
     toggle ? tl2.current.play() : tl2.current.reverse();
   }, [toggle]);
 
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+  // let interval = null;
+
+  useEffect(() => {
+    let homeLetter = document.querySelector('#home');
+    let iterations = 0;
+    let interval = setInterval(() => {
+      window.addEventListener('mouseover', () => {
+        homeLetter.innerText = homeLetter.innerText
+          .split('')
+          .map((letter, index) => {
+            if (index < iterations) {
+              homeLetter.dataset.value[index];
+            }
+            return letters[Math.floor(Math.random() * 26)].join('');
+          });
+      });
+
+      if (iterations >= homeLetter.dataset.value.length)
+        clearInterval(interval);
+
+      iterations += 1 / 3;
+    }, 30);
+  }, []);
+
   return (
     <>
       <MotionConfig
@@ -72,10 +99,6 @@ const Menu = () => {
         <motion.button
           initial={false}
           animate={toggle ? 'open' : 'close'}
-          // style={{
-          //   width: 'calc(2rem + 2.5vw)',
-          //   height: 'calc(2rem + 2.5vh)',
-          // }}
           className={`relative active:border-none rounded-full text-2xl w-14 h-14 md:w-[3.2rem] md:h-[3.2rem] cursor-pointer bg-white/30 backdrop-blur z-[400]`}
           ref={menuButton}
         >
@@ -140,22 +163,30 @@ const Menu = () => {
       </MotionConfig>
 
       <div
-        className="absolute top-0 bg-black h-screen w-[30rem] md:w-full z-[100] right-[0rem]"
+        className="absolute top-0 bottom-0 bg-black h-screen w-[30rem] md:w-full z-[100] right-[0rem]"
         ref={menuRef}
       >
         <div className="h-full flex-center">
-          <ul className="unordered font-neue-montreal text-[2.5rem] text-white text-left font-bold space-y-5">
-            <li className="cursor-pointer list">
-              <a to="/works">Home</a>
+          <ul className="unordered font-Canopee-Regular tracking-wider text-[3rem] text-white text-center font-bold space-y-5">
+            <li className="rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
+              <a id="home" data-value="Home" to="/Home">
+                Home
+              </a>
             </li>
-            <li className="cursor-pointer list">
-              <a to="/works">Work</a>
+            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
+              <a data-value="Works" to="/works">
+                Works
+              </a>
             </li>
-            <li className="cursor-pointer list">
-              <a to="/contact">Contact</a>
+            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
+              <a data-value="Contact" to="/contact">
+                Contact
+              </a>
             </li>
-            <li className="cursor-pointer list">
-              <a to="/cv">CV</a>
+            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
+              <a data-value="CV" to="/cv">
+                CV
+              </a>
             </li>
           </ul>
           <div

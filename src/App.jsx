@@ -81,7 +81,7 @@ const App = () => {
               backgroundImage:
                 'radial-gradient(125% 125% at 50% 100%, #121315 60% ,#00ffa2)',
             }}
-            className="px-12"
+            className="px-12 sm:px-3"
           >
             <About />
           </div>

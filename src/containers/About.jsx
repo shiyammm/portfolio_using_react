@@ -86,68 +86,75 @@ const About = () => {
 
   return (
     <section
-      className="w-full h-screen xl:h-[80vh] text-white/70 bg-[#121315] rounded-[2rem] px-[9rem] py-[9rem] xl:px-[4rem] flex flex-col justify-start xl:py-[4rem] about"
+      className="w-full h-screen xl:h-[80vh] sm:h-screen text-white/70 bg-[#121315] rounded-[2rem] flex flex-col justify-start  about"
       ref={(el) => {
         aboutRef.current = el;
         // ref.current = el;
       }}
     >
-      <div className="flex justify-between md:hidden">
-        <div>
-          <h2
-            style={{
-              fontSize: 'calc(0.9rem + 1vw)',
-              lineHeight: 'calc(3rem + 2vw)',
-            }}
-            className="text-left font-neue-montreal pb-[0.5rem] about-head"
-          >
-            {NameWords.map((nameWord, index) => (
-              <span key={index} className="inline-block word mr-2.5">
-                {nameWord}
-              </span>
-            ))}
-          </h2>
+      <div className="px-[9rem] py-[9rem] xl:px-[4rem] xl:py-[4rem] md:hidden">
+        <div className="flex justify-between ">
+          <div>
+            <h2
+              style={{
+                fontSize: 'calc(0.9rem + 1vw)',
+                lineHeight: 'calc(3rem + 2vw)',
+              }}
+              className="text-left font-neue-montreal pb-[0.5rem] about-head"
+            >
+              {NameWords.map((nameWord, index) => (
+                <span key={index} className="inline-block word mr-2.5">
+                  {nameWord}
+                </span>
+              ))}
+            </h2>
+          </div>
+          <div>
+            <h2
+              style={{
+                fontSize: 'calc(0.9rem + 1vw)',
+                lineHeight: 'calc(3rem + 2vw)',
+              }}
+              className="text-left font-neue-montreal about-head"
+            >
+              {BasedWords.map((basedWord, index) => (
+                <span key={index} className="inline-block mr-2.5 word">
+                  {basedWord}
+                </span>
+              ))}
+            </h2>
+          </div>
         </div>
-        <div>
-          <h2
+        <div className="w-full h-[2px] bg-white/70 paragraphDiv md:hidden"></div>
+        <div className="">
+          <p
+            className="text-left font-neue-montreal pt-[1rem] about-para md:hidden"
             style={{
-              fontSize: 'calc(0.9rem + 1vw)',
-              lineHeight: 'calc(3rem + 2vw)',
+              fontSize: 'calc(0.8rem + 1vw)',
+              lineHeight: 'calc(1rem + 3vw)',
             }}
-            className="text-left font-neue-montreal about-head"
           >
-            {BasedWords.map((basedWord, index) => (
-              <span key={index} className="inline-block mr-2.5 word">
-                {basedWord}
+            {ParagraphWords1.map((ParagraphWord1, index) => (
+              <span key={index} className="inline-block mr-3 word">
+                {ParagraphWord1}
               </span>
             ))}
-          </h2>
+          </p>
         </div>
       </div>
-      <div className="w-full h-[2px] bg-white/70 paragraphDiv md:hidden"></div>
-      <div className="">
+      <div className="hidden p-14 xs:p-7 md:block">
         <p
-          className="text-left font-neue-montreal pt-[1rem] about-para md:hidden"
-          style={{
-            fontSize: 'calc(0.8rem + 1vw)',
-            lineHeight: 'calc(1rem + 3vw)',
-          }}
-        >
-          {ParagraphWords1.map((ParagraphWord1, index) => (
-            <span key={index} className="inline-block mr-3 word">
-              {ParagraphWord1}
-            </span>
-          ))}
-        </p>
-        <p
-          className="text-left font-neue-montreal pt-[1rem] about-para hidden md:block"
+          className="text-left font-neue-montreal about-para "
           style={{
             fontSize: 'calc(0.8rem + 1vw)',
             lineHeight: 'calc(1rem + 3vw)',
           }}
         >
           {ParagraphWords2.map((ParagraphWord2, index) => (
-            <span key={index} className="inline-block mr-3 small-screen-word">
+            <span
+              key={index}
+              className="inline-block mr-3 xs:mr-2 small-screen-word"
+            >
               {ParagraphWord2}
             </span>
           ))}
