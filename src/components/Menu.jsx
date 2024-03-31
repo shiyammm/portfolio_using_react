@@ -62,32 +62,6 @@ const Menu = () => {
     toggle ? tl2.current.play() : tl2.current.reverse();
   }, [toggle]);
 
-  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-
-  // let interval = null;
-
-  useEffect(() => {
-    let homeLetter = document.querySelector('#home');
-    let iterations = 0;
-    let interval = setInterval(() => {
-      window.addEventListener('mouseover', () => {
-        homeLetter.innerText = homeLetter.innerText
-          .split('')
-          .map((letter, index) => {
-            if (index < iterations) {
-              homeLetter.dataset.value[index];
-            }
-            return letters[Math.floor(Math.random() * 26)].join('');
-          });
-      });
-
-      if (iterations >= homeLetter.dataset.value.length)
-        clearInterval(interval);
-
-      iterations += 1 / 3;
-    }, 30);
-  }, []);
-
   return (
     <>
       <MotionConfig
@@ -167,7 +141,7 @@ const Menu = () => {
         ref={menuRef}
       >
         <div className="h-full flex-center">
-          <ul className="unordered font-Canopee-Regular tracking-wider text-[3rem] text-white text-center font-bold space-y-5">
+          <ul className="unordered font-neue-montreal tracking-wider text-[3rem] text-white text-center font-semibold space-y-5">
             <li className="rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
               <a id="home" data-value="Home" to="/Home">
                 Home
