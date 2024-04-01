@@ -151,16 +151,19 @@ const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
           <ul className="unordered font-neue-montreal tracking-wider text-[2.5rem] text-white text-center font-semibold space-y-14">
             {NavLinks.map((link, i) => (
               <li
-                className="relative rounded-lg cursor-pointer hover:text-black list"
+                className="relative rounded-lg cursor-pointer hover:text-black xl:hover:text-white list"
                 key={i}
                 onMouseEnter={() => handleNavLinkEnter(link)}
                 onMouseLeave={() => handleNavLinkLeave(link)}
               >
                 <Magnet>
-                  <a id={link} to={`/#${link}`}>
+                  <a id={link} href={`/#${link}`} className="block xl:hidden">
                     {link}
                   </a>
                 </Magnet>
+                <a id={link} href={`/#${link}`} className="hidden xl:block">
+                  {link}
+                </a>
               </li>
             ))}
           </ul>
@@ -170,12 +173,14 @@ const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
             ref={socialLinksRef}
           >
             {SocialLinks.map((socialLink, i) => (
-              <a href="" className="text-white" key={i}>
-                <span className="flex items-center gap-5">
-                  <socialLink.icon />
-                  {socialLink.name}
-                </span>
-              </a>
+              <div key={i}>
+                <a href={socialLink.url} target="_blank" className="text-white">
+                  <span className="flex items-center gap-5">
+                    <socialLink.icon />
+                    {socialLink.name}
+                  </span>
+                </a>
+              </div>
             ))}
           </div>
         </div>

@@ -137,7 +137,7 @@ const Works = ({ cursor, setHoverLink }) => {
 
   return (
     <>
-      <section ref={component} className="overflow-hidden xl:hidden" id="works">
+      <section ref={component} className="overflow-hidden xl:hidden" id="Works">
         <div ref={slider} className="flex h-screen w-fit flex-nowrap ">
           <div className="w-screen h-screen flex-center">
             <h2
@@ -250,7 +250,7 @@ const Works = ({ cursor, setHoverLink }) => {
                 }}
                 className={`object-cover h-[6rem] ${
                   activeImg === i
-                    ? 'h-[25rem]  transition-all object-center overflow-hidden'
+                    ? 'h-[20rem]  transition-all object-center overflow-hidden'
                     : ''
                 } `}
                 id={`img-${i + 1}`}

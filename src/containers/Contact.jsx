@@ -4,8 +4,9 @@ import { FaLinkedin } from 'react-icons/fa';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { MdArrowOutward } from 'react-icons/md';
+import { SocialLinks } from '../../lib/data';
 
-const Contact = () => {
+const Contact = ({ setHoverMail }) => {
   let Text = "Let's connect";
   let textSplit = Text.split(' ');
 
@@ -41,10 +42,17 @@ const Contact = () => {
     });
   });
 
+  const handleMailIconEnter = () => {
+    setHoverMail(true);
+  };
+  const handleMailIconLeave = () => {
+    setHoverMail(false);
+  };
+
   return (
     <footer
       className="relative w-full h-screen text-white flex-center px-14 contact"
-      id="contact"
+      id="Contact"
     >
       <div>
         <a
@@ -53,6 +61,8 @@ const Contact = () => {
             fontSize: 'calc(2rem + 2.5vw)',
           }}
           className="flex items-center font-medium font-neue-montreal "
+          onMouseEnter={handleMailIconEnter}
+          onMouseLeave={handleMailIconLeave}
         >
           {textSplit.map((text, i) => (
             <span
@@ -69,19 +79,18 @@ const Contact = () => {
         <div className="w-full h-[1px] line bg-white"></div>
         <div className="flex items-center justify-between w-full py-10 px-14 links sm:flex-col sm:gap-4 sm:justify-center">
           <div className="space-y-4">
-            <div className="flex items-center gap-3 text-md">
-              <SiGithub />
-              <span className="inline-block  tracking-[0.1rem] font-medium font-neue-montreal">
-                Github
-              </span>
-            </div>
-            <div className="flex items-center gap-3 text-md">
-              <FaLinkedin />
-              <span className="inline-block  tracking-[0.1rem] font-medium font-neue-montreal">
-                LinkedIn
-              </span>
-            </div>
+            {SocialLinks.map((link) => (
+              <div key={link.name}>
+                <a href={link.url} className="flex items-center gap-3 text-md">
+                  <link.icon />
+                  <span className="inline-block  tracking-[0.1rem] font-medium font-neue-montreal">
+                    {link.name}
+                  </span>
+                </a>
+              </div>
+            ))}
           </div>
+
           <div className="space-y-4">
             <div className="">
               <span className="inline-block sm:text-sm  tracking-[0.1rem] font-medium font-neue-montreal">

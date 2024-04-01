@@ -59,6 +59,7 @@ const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
   return (
     <section
       className="relative z-10 w-full h-screen flex-center hero"
+      id="Home"
       style={{
         backgroundImage:
           'radial-gradient(125% 125% at 50% 0%, #121315 60% ,#00ffa2)',
@@ -122,7 +123,7 @@ const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
             marginTop: 'calc(0.3rem + 0.5vw)',
           }}
         >
-          Innovating Solutions, Igniting Progress
+          Nurturing Curiosity, Igniting Learning{' '}
         </span>
       </div>
     </section>

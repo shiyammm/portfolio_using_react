@@ -15,6 +15,7 @@ import {
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverNavLink, setHoverNavLink] = useState(false);
+  const [hoverMail, setHoverMail] = useState(false);
   const [getLinkHover, setGetLinkHover] = useState('');
   const tl1 = useRef();
   const loaderRefs = {
@@ -71,6 +72,7 @@ const App = () => {
             cursor={cursor}
             hoverNavLink={hoverNavLink}
             getLinkHover={getLinkHover}
+            hoverMail={hoverMail}
           />
           <Navbar
             hoverNavLink={hoverNavLink}
@@ -95,7 +97,7 @@ const App = () => {
             setHoverLink={setHoverLink}
           />
           <WhatIUse />
-          <Contact />
+          <Contact setHoverMail={setHoverMail} />
         </div>
       </main>
     </>
