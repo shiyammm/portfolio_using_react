@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
-import { useState } from 'react';
-import Magnet from '../components/Magnet';
-import { MotionConfig, motion, easeInOut } from 'framer-motion';
 
-const Navbar = ({ hoverNavLink, setHoverNavLink, navLoaderRef }) => {
+const Navbar = ({
+  setGetLinkHover,
+  getLinkHover,
+  setHoverNavLink,
+  navLoaderRef,
+  setEnterNavBar,
+}) => {
   const navRef = useRef();
 
   let lastScroll = 0;
@@ -41,7 +44,11 @@ const Navbar = ({ hoverNavLink, setHoverNavLink, navLoaderRef }) => {
         >
           Shiyam Robert
         </div>
-        <Menu />
+        <Menu
+          setHoverNavLink={setHoverNavLink}
+          setEnterNavBar={setEnterNavBar}
+          setGetLinkHover={setGetLinkHover}
+        />
       </nav>
     </header>
   );

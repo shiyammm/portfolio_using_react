@@ -1,19 +1,17 @@
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import React, { useEffect, useRef, useState } from 'react';
-import { PiStarFourFill } from 'react-icons/pi';
 import { MotionConfig, motion, easeInOut } from 'framer-motion';
-import { SiGithub } from 'react-icons/si';
-import { FaLinkedin } from 'react-icons/fa';
+import Magnet from '../components/Magnet';
+import { NavLinks, SocialLinks } from '../../lib/data';
 
-const Menu = () => {
+const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
   const [toggle, setToggle] = useState(false);
 
-  // const tl = useRef();
   const tl2 = useRef();
   const menuRef = useRef();
   const menuButton = useRef();
-  const linksRef = useRef();
+  const socialLinksRef = useRef();
 
   useEffect(() => {
     const handleMenuClick = () => {
@@ -48,7 +46,7 @@ const Menu = () => {
           duration: 0.3,
           ease: 'bounce.in',
         })
-        .from(linksRef.current, {
+        .from(socialLinksRef.current, {
           y: 100,
           opacity: 0,
           duration: 0.5,
@@ -61,6 +59,15 @@ const Menu = () => {
   useEffect(() => {
     toggle ? tl2.current.play() : tl2.current.reverse();
   }, [toggle]);
+
+  const handleNavLinkEnter = (link) => {
+    setGetLinkHover(link);
+    setHoverNavLink(true);
+  };
+  const handleNavLinkLeave = () => {
+    setGetLinkHover('');
+    setHoverNavLink(false);
+  };
 
   return (
     <>
@@ -137,48 +144,39 @@ const Menu = () => {
       </MotionConfig>
 
       <div
-        className="absolute top-0 bottom-0 bg-black h-screen w-[30rem] md:w-full z-[100] right-[0rem]"
+        className="absolute top-0 bottom-0 bg-black h-screen w-[30rem] md:w-full right-[0rem] "
         ref={menuRef}
       >
         <div className="h-full flex-center">
-          <ul className="unordered font-neue-montreal tracking-wider text-[3rem] text-white text-center font-semibold space-y-5">
-            <li className="rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
-              <a id="home" data-value="Home" to="/Home">
-                Home
-              </a>
-            </li>
-            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
-              <a data-value="Works" to="/works">
-                Works
-              </a>
-            </li>
-            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
-              <a data-value="Contact" to="/contact">
-                Contact
-              </a>
-            </li>
-            <li className="px-2 py-3 rounded-lg cursor-pointer hover:bg-cyan hover:text-black list">
-              <a data-value="CV" to="/cv">
-                CV
-              </a>
-            </li>
+          <ul className="unordered font-neue-montreal tracking-wider text-[2.5rem] text-white text-center font-semibold space-y-14">
+            {NavLinks.map((link, i) => (
+              <li
+                className="relative rounded-lg cursor-pointer hover:text-black list"
+                key={i}
+                onMouseEnter={() => handleNavLinkEnter(link)}
+                onMouseLeave={() => handleNavLinkLeave(link)}
+              >
+                <Magnet>
+                  <a id={link} to={`/#${link}`}>
+                    {link}
+                  </a>
+                </Magnet>
+              </li>
+            ))}
           </ul>
+
           <div
             className="absolute flex items-center justify-between w-full px-16 text-xl text-white bottom-5 font-circular-book"
-            ref={linksRef}
+            ref={socialLinksRef}
           >
-            <a href="" className="text-white">
-              <span className="flex items-center gap-5">
-                <SiGithub />
-                Github
-              </span>
-            </a>
-            <a href="" className="text-white">
-              <span className="flex items-center gap-5">
-                <FaLinkedin />
-                LinkedIn
-              </span>
-            </a>
+            {SocialLinks.map((socialLink, i) => (
+              <a href="" className="text-white" key={i}>
+                <span className="flex items-center gap-5">
+                  <socialLink.icon />
+                  {socialLink.name}
+                </span>
+              </a>
+            ))}
           </div>
         </div>
       </div>

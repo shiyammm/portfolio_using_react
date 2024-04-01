@@ -15,6 +15,7 @@ import {
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverNavLink, setHoverNavLink] = useState(false);
+  const [getLinkHover, setGetLinkHover] = useState('');
   const tl1 = useRef();
   const loaderRefs = {
     loader1: useRef(null),
@@ -69,11 +70,14 @@ const App = () => {
             hoverLink={hoverLink}
             cursor={cursor}
             hoverNavLink={hoverNavLink}
+            getLinkHover={getLinkHover}
           />
           <Navbar
             hoverNavLink={hoverNavLink}
             setHoverNavLink={setHoverNavLink}
             navLoaderRef={navLoaderRef}
+            setGetLinkHover={setGetLinkHover}
+            getLinkHover={getLinkHover}
           />
           <Hero tl1={tl1} loaderRefs={loaderRefs} navLoaderRef={navLoaderRef} />
           <div
