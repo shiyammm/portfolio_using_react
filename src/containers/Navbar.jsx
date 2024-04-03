@@ -3,7 +3,6 @@ import Menu from '../components/Menu';
 
 const Navbar = ({
   setGetLinkHover,
-  getLinkHover,
   setHoverNavLink,
   navLoaderRef,
   setEnterNavBar,
@@ -44,6 +43,7 @@ const Navbar = ({
         >
           Shiyam Robert
         </div>
+
         <Menu
           setHoverNavLink={setHoverNavLink}
           setEnterNavBar={setEnterNavBar}
