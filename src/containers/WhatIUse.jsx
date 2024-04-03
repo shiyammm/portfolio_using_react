@@ -21,6 +21,13 @@ const WhatIUse = () => {
     () => {
       tl4.current = gsap.timeline();
 
+      tl4.current.from('.skill-title', {
+        y: 80,
+        opacity: 0,
+        duration: 1,
+        ease: 'power.in',
+      });
+
       tl4.current.from('.word', {
         y: 30,
         opacity: 0,
@@ -138,9 +145,17 @@ const WhatIUse = () => {
 
   return (
     <section
-      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden py-14 xl:flex-center flex-col"
+      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden py-14 xl:flex-center flex-col relative"
       ref={skillRef}
     >
+      <h1
+        style={{
+          fontSize: 'calc(2.5rem + 2.5vw)',
+        }}
+        className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 skill-title"
+      >
+        What I use
+      </h1>
       <div className="text-left text-white mt-[2rem] flex items-center justify-center title flex-col space-y-9 ">
         <p className=" text-center  font-roslindale-display text-white/50  mt-[1rem] text-div px-10 skill-para">
           {ParagraphWords.map((ParagraphWord, index) => (
@@ -174,7 +189,6 @@ const WhatIUse = () => {
         className="flex-wrap items-center justify-center hidden px-3 xl:flex"
         style={{
           width: 'calc(24.6rem + 24.6vw)',
-          // height: 'calc(20.5rem + 20.5vw)',
           gap: 'calc(1.6rem + 1.6vw)',
         }}
       >
@@ -183,8 +197,6 @@ const WhatIUse = () => {
             style={{
               width: 'calc(3.5rem + 3.5vw)',
               height: 'calc(3.5rem + 3.5vw)',
-              // boxShadow: '0px 0px 5px 1px  #37EBA9',
-              // borderRadius: '50%',
             }}
             key={i}
             className="flex flex-col items-center justify-center gap-5 text-center "
@@ -197,8 +209,10 @@ const WhatIUse = () => {
               }}
             />
             <span
-              style={{ fontSize: 'calc(0.7rem + 0.7vw)' }}
-              className=" text-white/70 name"
+              style={{
+                fontSize: 'calc(0.7rem + 0.7vw)',
+              }}
+              className="font-medium tracking-wide text-white/70 name font-neue-montreal"
             >
               {skill.name}
             </span>
