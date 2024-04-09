@@ -2,10 +2,10 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import React, { useEffect, useRef, useState } from 'react';
 import { MotionConfig, motion, easeInOut } from 'framer-motion';
-import Magnet from '../components/Magnet';
 import { NavLinks, SocialLinks } from '../../lib/data';
+import TextHoverEffect from './TextHoverEffect';
 
-const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
+const Menu = () => {
   const [toggle, setToggle] = useState(false);
 
   const tl2 = useRef();
@@ -59,15 +59,6 @@ const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
   useEffect(() => {
     toggle ? tl2.current.play() : tl2.current.reverse();
   }, [toggle]);
-
-  const handleNavLinkEnter = (link) => {
-    setGetLinkHover(link);
-    setHoverNavLink(true);
-  };
-  const handleNavLinkLeave = () => {
-    setGetLinkHover('');
-    setHoverNavLink(false);
-  };
 
   return (
     <>
@@ -148,19 +139,10 @@ const Menu = ({ setHoverNavLink, setGetLinkHover }) => {
         ref={menuRef}
       >
         <div className="h-full flex-center">
-          <ul className="unordered font-neue-montreal tracking-wider text-[2.5rem] text-white text-center font-semibold space-y-14">
+          <ul className="space-y-5 font-semibold text-center text-white unordered font-neue-montreal">
             {NavLinks.map((link, i) => (
-              <li
-                className="relative rounded-lg cursor-pointer hover:text-black xl:hover:text-white list"
-                key={i}
-                onMouseEnter={() => handleNavLinkEnter(link)}
-                onMouseLeave={() => handleNavLinkLeave(link)}
-              >
-                <Magnet>
-                  <a id={link} href={`/#${link}`} className="block xl:hidden">
-                    {link}
-                  </a>
-                </Magnet>
+              <li className="relative" key={i}>
+                <TextHoverEffect link={link} />
                 <a id={link} href={`/#${link}`} className="hidden xl:block">
                   {link}
                 </a>

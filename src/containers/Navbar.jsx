@@ -1,12 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
 
-const Navbar = ({
-  setGetLinkHover,
-  setHoverNavLink,
-  navLoaderRef,
-  setEnterNavBar,
-}) => {
+const Navbar = ({ navLoaderRef }) => {
   const navRef = useRef();
 
   let lastScroll = 0;
@@ -43,12 +38,7 @@ const Navbar = ({
         >
           Shiyam Robert
         </div>
-
-        <Menu
-          setHoverNavLink={setHoverNavLink}
-          setEnterNavBar={setEnterNavBar}
-          setGetLinkHover={setGetLinkHover}
-        />
+        <Menu />
       </nav>
     </header>
   );

@@ -14,9 +14,7 @@ import {
 
 const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
-  const [hoverNavLink, setHoverNavLink] = useState(false);
   const [hoverMail, setHoverMail] = useState(false);
-  const [getLinkHover, setGetLinkHover] = useState('');
   const tl1 = useRef();
   const loaderRefs = {
     loader1: useRef(null),
@@ -67,28 +65,10 @@ const App = () => {
               ref={loaderRefs.loader3}
             ></div>
           </div>
-          <Cursor
-            hoverLink={hoverLink}
-            cursor={cursor}
-            hoverNavLink={hoverNavLink}
-            getLinkHover={getLinkHover}
-            hoverMail={hoverMail}
-          />
-          <Navbar
-            hoverNavLink={hoverNavLink}
-            setHoverNavLink={setHoverNavLink}
-            navLoaderRef={navLoaderRef}
-            setGetLinkHover={setGetLinkHover}
-            getLinkHover={getLinkHover}
-          />
+          <Cursor hoverLink={hoverLink} cursor={cursor} hoverMail={hoverMail} />
+          <Navbar navLoaderRef={navLoaderRef} />
           <Hero tl1={tl1} loaderRefs={loaderRefs} navLoaderRef={navLoaderRef} />
-          <div
-            style={{
-              backgroundImage:
-                'radial-gradient(125% 125% at 50% 100%, #121315 60% ,#00ffa2)',
-            }}
-            className="px-12 sm:px-3"
-          >
+          <div className="px-12 sm:px-3 about-div">
             <About />
           </div>
           <Works
