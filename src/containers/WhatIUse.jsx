@@ -43,6 +43,11 @@ const WhatIUse = () => {
         ease: 'power4.out',
       });
 
+      tl4.current.from(sliderRef.current, {
+        y: 80,
+        opacity: 0,
+      });
+
       tl4.current.from('.icon', {
         scale: 0,
         opacity: 0,
@@ -80,7 +85,7 @@ const WhatIUse = () => {
         animation: tl4.current,
       });
     },
-    { scope: skillRef },
+    { scope: skillRef, sliderRef },
   );
 
   useEffect(() => {
@@ -145,7 +150,7 @@ const WhatIUse = () => {
 
   return (
     <section
-      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden py-14 xl:flex-center flex-col relative"
+      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden xl:flex-center flex-col relative whatIUse"
       ref={skillRef}
     >
       <h1
@@ -156,8 +161,13 @@ const WhatIUse = () => {
       >
         What I use
       </h1>
-      <div className="text-left text-white mt-[2rem] flex items-center justify-center title flex-col space-y-9 ">
-        <p className=" text-center  font-roslindale-display text-white/50  mt-[1rem] text-div px-10 skill-para">
+      <div className="flex flex-col items-center justify-center text-left text-white title space-y-9 ">
+        <p
+          style={{
+            paddingBlock: 'calc(2.5rem + 2.5vw)',
+          }}
+          className="px-10 text-center font-roslindale-display text-white/50 text-div skill-para"
+        >
           {ParagraphWords.map((ParagraphWord, index) => (
             <span key={index} className="inline-block mr-3 word">
               {ParagraphWord}
@@ -170,12 +180,12 @@ const WhatIUse = () => {
           <span className="arrow-right"> → </span>
         </span>
       </div>
-      <div className="relative grid w-full xl:hidden " ref={sliderRef}>
+      <div className="relative grid w-full xl:hidden" ref={sliderRef}>
         <div className="skill_container" ref={skillTextRef}>
           <div className="flex flex-nowrap gap-[6rem] bg-violet font-Canopee-Regular skill_text uppercase p-7 2xl:p-4 xl:p-2 font-medium text-black tracking-[0.6rem] xl:mt-[3rem]">
             {skillsData.map((skill, index) => (
               <span
-                className=" flex items-center gap-[3rem] xl:gap-[2rem] whitespace-nowrap text-[7rem] xl:text-[4rem] skill relative will-change-transform "
+                className=" flex items-center gap-[3rem] xl:gap-[2rem] whitespace-nowrap text-[5rem] xl:text-[4rem] skill relative will-change-transform "
                 key={index}
               >
                 <PiStarFourFill className="w-10 h-10 font-Canopee-Regular" />
@@ -189,7 +199,7 @@ const WhatIUse = () => {
         className="flex-wrap items-center justify-center hidden px-3 xl:flex"
         style={{
           width: 'calc(24.6rem + 24.6vw)',
-          gap: 'calc(1.6rem + 1.6vw)',
+          gap: 'calc(1.567rem + 1.567vw)',
         }}
       >
         {skillsData.map((skill, i) => (
@@ -199,7 +209,7 @@ const WhatIUse = () => {
               height: 'calc(3.5rem + 3.5vw)',
             }}
             key={i}
-            className="flex flex-col items-center justify-center gap-5 text-center "
+            className="flex flex-col items-center justify-center gap-5 text-center"
           >
             <skill.icon
               className=" text-white/50 icon"

@@ -143,7 +143,11 @@ const Menu = () => {
             {NavLinks.map((link, i) => (
               <li className="relative" key={i}>
                 <TextHoverEffect link={link} />
-                <a id={link} href={`/#${link}`} className="hidden xl:block">
+                <a
+                  id={link}
+                  href={`/#${link}`}
+                  className="hidden xl:block text-[2rem]"
+                >
                   {link}
                 </a>
               </li>

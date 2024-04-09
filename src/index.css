@@ -127,8 +127,7 @@
 @media (max-width: 1279px) {
   .about,
   .works-mob,
-  .whatIUse,
-  .contact {
+  .whatIUse {
     height: calc(30.5rem + 30.5vw);
   }
 }

@@ -234,14 +234,14 @@ const Works = ({ cursor, setHoverLink }) => {
         </div>
       </section>
       <section
-        className="relative items-center justify-center hidden w-full h-screen px-6 text-white xl:flex"
+        className="relative items-center justify-center hidden w-full h-screen px-6 text-white xl:flex works-mob"
         ref={projectsSmallScreenDiv}
       >
         <h1
           style={{
             fontSize: 'calc(2.5rem + 2.5vw)',
           }}
-          className="absolute text-white top-2 font-Canopee-Regular works-title"
+          className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 skill-title"
         >
           Works
         </h1>

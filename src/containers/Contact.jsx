@@ -1,6 +1,4 @@
 import React from 'react';
-import { SiGithub } from 'react-icons/si';
-import { FaLinkedin } from 'react-icons/fa';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { MdArrowOutward } from 'react-icons/md';
@@ -77,8 +75,8 @@ const Contact = ({ setHoverMail }) => {
       </div>
       <div className="absolute bottom-0 w-full">
         <div className="w-full h-[1px] line bg-white"></div>
-        <div className="flex items-center justify-between w-full py-10 px-14 links sm:flex-col sm:gap-4 sm:justify-center">
-          <div className="space-y-4">
+        <div className="flex items-center justify-between w-full py-10 sm:flex-col px-14 links">
+          <div className="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
             {SocialLinks.map((link) => (
               <div key={link.name}>
                 <a href={link.url} className="flex items-center gap-3 text-md">
@@ -91,15 +89,15 @@ const Contact = ({ setHoverMail }) => {
             ))}
           </div>
 
-          <div className="space-y-4">
-            <div className="">
-              <span className="inline-block sm:text-sm  tracking-[0.1rem] font-medium font-neue-montreal">
-                Created by Shiyam Robert
+          <div className="items-center space-y-4 sm:">
+            <div className="sm:hidden">
+              <span className="inline-block sm:text-xs  tracking-[0.1rem] font-medium font-neue-montreal">
+                shiyamrobert@gmail.com
               </span>
             </div>
             <div className="">
-              <span className="inline-block sm:text-sm  tracking-[0.1rem] font-medium font-neue-montreal">
-                shiyamrobert@gmail.com
+              <span className="inline-block sm:text-xs  tracking-[0.1rem] font-medium font-neue-montreal">
+                Created by Shiyam Robert
               </span>
             </div>
           </div>
