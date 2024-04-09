@@ -14,11 +14,11 @@ const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
       })
       .to(loaderRefs.loader2.current, {
         height: '0vh',
-        duration: 0.5,
+        duration: 0.6,
       })
       .to(loaderRefs.loader3.current, {
         height: '0vh',
-        duration: 0.3,
+        duration: 0.7,
       })
       .from('.word-1', {
         opacity: 0,
@@ -60,10 +60,6 @@ const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
     <section
       className="relative z-10 w-full h-screen flex-center hero"
       id="Home"
-      style={{
-        backgroundImage:
-          'radial-gradient(125% 125% at 50% 0%, #121315 60% ,#00ffa2)',
-      }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Canvas>

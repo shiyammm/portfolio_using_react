@@ -86,7 +86,7 @@ const About = () => {
 
   return (
     <section
-      className="w-full h-screen xl:h-[80vh] sm:h-screen text-white/70 bg-[#121315] rounded-[2rem] flex flex-col justify-start  about"
+      className="w-full h-screen text-white/70 bg-[#121315] rounded-[2rem] flex flex-col justify-start about"
       ref={(el) => {
         aboutRef.current = el;
         // ref.current = el;
@@ -142,7 +142,7 @@ const About = () => {
           </p>
         </div>
       </div>
-      <div className="hidden p-14 xs:p-7 md:block">
+      <div className="hidden p-14 xs:p-7 sm:p-10 md:block">
         <p
           className="text-left font-neue-montreal about-para "
           style={{

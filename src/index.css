@@ -107,13 +107,31 @@
   }
 }
 
+.hero {
+  background-image: radial-gradient(125% 125% at 50% 0%, #121315 60%, #00ffa2);
+}
+.about-div {
+  background-image: radial-gradient(
+    125% 125% at 50% 100%,
+    #121315 60%,
+    #00ffa2
+  );
+}
+
 .skill-para {
   width: calc(40rem + 40vw);
   font-size: calc(1.5rem + 1vw);
   line-height: calc(3rem + 2vw);
-  padding-block: 3rem;
 }
 
+@media (max-width: 1279px) {
+  .about,
+  .works-mob,
+  .whatIUse,
+  .contact {
+    height: calc(30.5rem + 30.5vw);
+  }
+}
 @media (max-width: 1023px) {
   .skill-para {
     width: calc(35rem + 35vw);
@@ -124,6 +142,22 @@
     width: calc(30rem + 30vw);
     font-size: calc(1rem + 1vw);
     line-height: calc(2rem + 2vw);
+  }
+}
+@media (max-width: 767px) {
+  .hero {
+    background-image: radial-gradient(
+      135% 135% at 50% 0%,
+      #121315 60%,
+      #00ffa2
+    );
+  }
+  .about-div {
+    background-image: radial-gradient(
+      135% 135% at 50% 100%,
+      #121315 60%,
+      #00ffa2
+    );
   }
 }
 @media (max-width: 596px) {
