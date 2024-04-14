@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import { useGSAP } from '@gsap/react';

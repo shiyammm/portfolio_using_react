@@ -146,7 +146,7 @@ const WhatIUse = () => {
 
     window.addEventListener('mousemove', handleMouse);
     window.addEventListener('resize', handleWindowResize);
-  });
+  }, []);
 
   return (
     <section
