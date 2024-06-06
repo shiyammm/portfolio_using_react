@@ -16,11 +16,6 @@ const App = () => {
   const [hoverLink, setHoverLink] = useState(false);
   const [hoverMail, setHoverMail] = useState(false);
   const tl1 = useRef();
-  const loaderRefs = {
-    loader1: useRef(null),
-    loader2: useRef(null),
-    loader3: useRef(null),
-  };
   const navLoaderRef = useRef();
 
   const cursor = useRef();
@@ -48,26 +43,9 @@ const App = () => {
     <>
       <main className="relative overflow-hidden">
         <div className="relative bg-[#121315]">
-          <div id="loader" className="z-[900] w-full absolute  text-white ">
-            <div
-              id="loader1"
-              className="w-full h-screen bg-cyan"
-              ref={loaderRefs.loader1}
-            ></div>
-            <div
-              id="loader2"
-              className=" bg-[#121315] w-full h-screen"
-              ref={loaderRefs.loader2}
-            ></div>
-            <div
-              id="loader3"
-              className="w-full h-screen bg-cyan"
-              ref={loaderRefs.loader3}
-            ></div>
-          </div>
           <Cursor hoverLink={hoverLink} cursor={cursor} hoverMail={hoverMail} />
           <Navbar navLoaderRef={navLoaderRef} />
-          <Hero tl1={tl1} loaderRefs={loaderRefs} navLoaderRef={navLoaderRef} />
+          <Hero tl1={tl1} navLoaderRef={navLoaderRef} />
           <div className="px-12 sm:px-3 about-div">
             <About />
           </div>

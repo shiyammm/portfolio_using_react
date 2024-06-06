@@ -3,22 +3,10 @@ import { Stars } from '@react-three/drei';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
-const Hero = ({ tl1, loaderRefs, navLoaderRef }) => {
+const Hero = ({ tl1, navLoaderRef }) => {
   useGSAP(() => {
     tl1.current = gsap
       .timeline()
-      .to(loaderRefs.loader1.current, {
-        height: '0vh',
-        duration: 0.5,
-      })
-      .to(loaderRefs.loader2.current, {
-        height: '0vh',
-        duration: 0.6,
-      })
-      .to(loaderRefs.loader3.current, {
-        height: '0vh',
-        duration: 0.7,
-      })
       .from('.word-1', {
         opacity: 0,
         skewX: '-20deg',
