@@ -1,14 +1,17 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
 import { FiExternalLink } from 'react-icons/fi';
+import { GlobalContext } from '../../context/GlobalContext';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Works = ({ cursor, setHoverLink }) => {
+const Works = () => {
+  const { cursor, setHoverLink } = useContext(GlobalContext);
+
   const [activeImg, setActiveImg] = useState(null);
   const slider = useRef();
   const component = useRef();
@@ -122,7 +125,7 @@ const Works = ({ cursor, setHoverLink }) => {
       ScrollTrigger.create({
         trigger: projectsSmallScreenDiv.current,
         // markers: true,
-        start: 'top 20%',
+        start: 'top 60%',
         end: 'top 90%',
         animation: tl3.current,
       });
@@ -240,7 +243,7 @@ const Works = ({ cursor, setHoverLink }) => {
           style={{
             fontSize: 'calc(2.5rem + 2.5vw)',
           }}
-          className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 skill-title"
+          className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 works-title"
         >
           Works
         </h1>

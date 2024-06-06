@@ -11,13 +11,9 @@ import {
   WhatIUse,
   Contact,
 } from './constants/index';
+import { GlobalProvider } from '../context/GlobalContext';
 
 const App = () => {
-  const [hoverLink, setHoverLink] = useState(false);
-  const [hoverMail, setHoverMail] = useState(false);
-  const tl1 = useRef();
-  const navLoaderRef = useRef();
-
   const cursor = useRef();
 
   const lenis = new Lenis();
@@ -40,25 +36,21 @@ const App = () => {
   });
 
   return (
-    <>
+    <GlobalProvider>
       <main className="relative overflow-hidden">
         <div className="relative bg-[#121315]">
-          <Cursor hoverLink={hoverLink} cursor={cursor} hoverMail={hoverMail} />
-          <Navbar navLoaderRef={navLoaderRef} />
-          <Hero tl1={tl1} navLoaderRef={navLoaderRef} />
+          <Cursor cursor={cursor} />
+          <Navbar />
+          <Hero />
           <div className="px-12 sm:px-3 about-div">
             <About />
           </div>
-          <Works
-            cursor={cursor}
-            hoverLink={hoverLink}
-            setHoverLink={setHoverLink}
-          />
+          <Works />
           <WhatIUse />
-          <Contact setHoverMail={setHoverMail} />
+          <Contact />
         </div>
       </main>
-    </>
+    </GlobalProvider>
   );
 };
 

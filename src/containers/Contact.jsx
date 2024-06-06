@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { MdArrowOutward } from 'react-icons/md';
 import { SocialLinks } from '../../lib/data';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const Contact = ({ setHoverMail }) => {
+const Contact = () => {
+  const { setHoverMail } = useContext(GlobalContext);
+
   let Text = "Let's connect";
   let textSplit = Text.split(' ');
 

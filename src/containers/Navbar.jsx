@@ -1,7 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import Menu from '../components/Menu';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const Navbar = ({ navLoaderRef }) => {
+const Navbar = () => {
+  const { navLoaderRef } = useContext(GlobalContext);
+
   const navRef = useRef();
 
   let lastScroll = 0;

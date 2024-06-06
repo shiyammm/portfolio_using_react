@@ -6,6 +6,7 @@ import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
+
 const WhatIUse = () => {
   const skillRef = useRef();
   const skillTextRef = useRef();

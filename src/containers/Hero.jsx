@@ -2,8 +2,12 @@ import { Canvas } from '@react-three/fiber';
 import { Stars } from '@react-three/drei';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { useContext } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 
-const Hero = ({ tl1, navLoaderRef }) => {
+const Hero = () => {
+  const { tl1, navLoaderRef } = useContext(GlobalContext);
+
   useGSAP(() => {
     tl1.current = gsap
       .timeline()
