@@ -78,7 +78,7 @@ const Contact = () => {
       </div>
       <div className="absolute bottom-0 w-full">
         <div className="w-full h-[1px] line bg-white"></div>
-        <div className="flex items-center justify-between w-full py-10 sm:flex-col px-14 links">
+        <div className="flex-between w-full py-10 sm:flex-col px-14 links">
           <div className="items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
             {SocialLinks.map((link) => (
               <div key={link.name}>

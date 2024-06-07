@@ -1,144 +1,142 @@
-import gsap from 'gsap';
-import { useGSAP } from '@gsap/react';
-import React, { useEffect, useRef, useState } from 'react';
-import { MotionConfig, motion, easeInOut } from 'framer-motion';
+'use client';
+
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useState } from 'react';
 import { NavLinks, SocialLinks } from '../../lib/data';
-import TextHoverEffect from './TextHoverEffect';
+import TextHoverEffect from '../components/TextHoverEffect';
 
 const Menu = () => {
-  const [toggle, setToggle] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
-  const tl2 = useRef();
-  const menuRef = useRef();
-  const menuButton = useRef();
-  const socialLinksRef = useRef();
-
-  useEffect(() => {
-    const handleMenuClick = () => {
-      setToggle((prev) => !prev);
-    };
-    menuButton.current.addEventListener('click', handleMenuClick);
-    return () => {
-      menuButton.current.removeEventListener('click', handleMenuClick);
-    };
-  }, [toggle]);
-
-  useGSAP(
-    () => {
-      tl2.current = gsap
-        .timeline({
-          paused: true,
-          reversed: true,
-        })
-        .from(menuRef.current, {
-          right: '0rem',
-          top: '0rem',
-          bottom: '0rem',
-          width: '0rem',
-          height: '0rem',
-          duration: 0.3,
-          ease: 'power.in',
-        })
-        .from('li', {
-          x: 500,
-          opacity: 0,
-          stagger: 0.2,
-          duration: 0.3,
-          ease: 'bounce.in',
-        })
-        .from(socialLinksRef.current, {
-          y: 100,
-          opacity: 0,
-          duration: 0.5,
-          ease: 'power.in',
-        });
+  const variants = {
+    open: {
+      width: 400,
+      height: 550,
+      top: '-25px',
+      right: '-25px',
+      transition: {
+        duration: 0.5,
+        type: 'tween',
+        ease: [0.75, 0, 0.24, 1],
+      },
     },
-    { scope: toggle },
-  );
+    closed: {
+      width: 100,
+      height: 40,
+      top: '0px',
+      right: '0px',
+      transition: {
+        duration: 0.5,
+        delay: 0.5,
+        type: 'tween',
+        ease: [0.75, 0, 0.24, 1],
+      },
+    },
+  };
 
-  useEffect(() => {
-    toggle ? tl2.current.play() : tl2.current.reverse();
-  }, [toggle]);
+  const perspective = {
+    initial: {
+      opacity: 0,
+    },
+    enter: (i) => ({
+      opacity: 1,
+      transition: {
+        delay: 0.5 + i * 0.1,
+        duration: 0.5,
+        type: 'tween',
+        ease: [0.76, 0, 0.24, 1],
+      },
+    }),
+    exit: {
+      opacity: 0,
+    },
+  };
 
   return (
     <>
-      <MotionConfig
-        transition={{
-          duration: 0.5,
-          ease: easeInOut,
-        }}
+      <motion.div
+        className="bg-[#1d1d1f] w-96 h-96 rounded-3xl relative font-circular-book"
+        variants={variants}
+        animate={isActive ? 'open' : 'closed'}
+        initial="closed"
       >
-        <motion.button
-          type="button"
-          name="menu-button"
-          initial={false}
-          animate={toggle ? 'open' : 'close'}
-          className={`relative active:border-none rounded-full text-2xl w-14 h-14 md:w-[3.2rem] md:h-[3.2rem] cursor-pointer bg-white/30 backdrop-blur z-[400]`}
-          ref={menuButton}
+        <AnimatePresence>
+          {isActive && (
+            <div className="flex flex-col justify-between h-full pt-20 pb-10 pl-16 pr-10">
+              <div className="gap-10 space-y-3 body">
+                {NavLinks.map((navLink, i) => (
+                  <motion.div
+                    key={navLink}
+                    className="font-medium"
+                    variants={perspective}
+                    custom={i}
+                    initial="initial"
+                    animate="enter"
+                    exit="exit"
+                  >
+                    <a href="" className="text-[40px] flex">
+                      {/* <TextHoverEffect> */}
+                      {navLink}
+                      {/* </TextHoverEffect> */}
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+              <motion.div
+                className="text-2xl font-medium footer flex-between"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.5,
+                  type: 'tween',
+                  ease: [0.76, 0, 0.24, 1],
+                  delay: 0.9,
+                }}
+                exit="exit"
+              >
+                {SocialLinks.map((social, i) => (
+                  <div className="flex items-center gap-2" key={social.name}>
+                    <social.icon />
+                    <a href="http://">{social.name}</a>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+      <div
+        className="text-lg font-semibold button hover:font-semibold"
+        onClick={() => setIsActive(!isActive)}
+      >
+        <motion.div
+          className="slider"
+          animate={{ top: isActive ? '-100%' : '0' }}
+          transition={{
+            duration: 0.5,
+            type: 'tween',
+            ease: [0.76, 0, 0.24, 1],
+          }}
         >
-          <motion.span
-            style={{ left: '50%', top: '30%', x: '-50%', y: '-50%' }}
-            className="absolute h-[3px] bg-white w-7"
-            variants={{
-              open: {
-                rotate: ['0deg', '0deg', '45deg'],
-                top: ['33%', '33%', '50%'],
-              },
-              close: {
-                rotate: ['45deg', '0deg', '0deg'],
-                top: ['50%', '50%', '33%'],
-              },
-            }}
-          />
-          <motion.span
-            style={{
-              left: 'calc(50% + 4px)',
-              top: '50%',
-              x: '-50%',
-              y: '-50%',
-              width: '20px',
-            }}
-            className="absolute h-[3px] bg-white"
-            variants={{
-              open: {
-                rotate: ['0deg', '0deg', '-45deg'],
-                width: '28px',
-                left: '50%',
-              },
-              close: {
-                rotate: ['-45deg', '0deg', '0deg'],
-                width: '20px',
-                left: 'calc(50% + 4px)',
-              },
-            }}
-          />
-          <motion.span
-            style={{
-              left: 'calc(50% + 7px)',
-              bottom: '25%',
-              x: '-50%',
-              y: '-50%',
-            }}
-            className="w-3.5 h-[3px] bg-white absolute"
-            variants={{
-              open: {
-                rotate: ['0deg', '0deg', '45deg'],
-                bottom: ['27%', '27%', '50%'],
-                left: '45%',
-              },
-              close: {
-                rotate: ['45deg', '0deg', '0deg'],
-                bottom: ['50%', '50%', '27%'],
-                left: 'calc(50% + 7px)',
-              },
-            }}
-          />
-        </motion.button>
-      </MotionConfig>
+          <div className="element">
+            <p>Menu</p>
+          </div>
+          <div className="element">
+            <p>Close</p>
+          </div>
+        </motion.div>
+      </div>
+    </>
+  );
+};
+
+export default Menu;
+
+{
+  /* 
 
       <div
         className="absolute top-0 bottom-0 bg-black h-screen w-[30rem] md:w-full right-[0rem] "
-        ref={menuRef}
       >
         <div className="h-full flex-center">
           <ul className="space-y-5 font-semibold text-center text-white unordered font-neue-montreal">
@@ -168,9 +166,5 @@ const Menu = () => {
             ))}
           </div>
         </div>
-      </div>
-    </>
-  );
-};
-
-export default Menu;
+      </div> */
+}

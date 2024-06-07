@@ -32,16 +32,22 @@ const Navbar = () => {
       ref={navRef}
     >
       <nav
-        className="flex items-center justify-between flex-shrink-0 w-full pt-6 px-14 md:px-8"
+        className="fixed w-full text-white bg-transparent"
         ref={navLoaderRef}
       >
-        <div
-          className="text-[2rem] font-Canopee-Regular text-white"
-          style={{ fontSize: 'calc(1.5rem + 0.5vw)' }}
-        >
-          Shiyam Robert
+        <div className="absolute top-10 left-10">
+          <h1
+            className="text-[2rem] font-Canopee-Regular text-white"
+            style={{ fontSize: 'calc(1.5rem + 0.5vw)' }}
+          >
+            Shiyam Robert
+          </h1>
         </div>
-        <Menu />
+        <div className="relative w-full flex-between">
+          <div className="absolute top-10 right-10">
+            <Menu />
+          </div>
+        </div>
       </nav>
     </header>
   );

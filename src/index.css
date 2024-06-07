@@ -8,35 +8,35 @@
 
 @font-face {
   font-family: acme;
-  src: url(./assets/fonts/Acme-Regular.ttf);
+  src: url(./assets/fonts/Acme-Regular.woff2);
 }
 @font-face {
   font-family: circular-book;
-  src: url(./assets/fonts/CircularStd-Book.ttf);
+  src: url(./assets/fonts/CircularStd-Book.woff2);
 }
 @font-face {
   font-family: circular-medium;
-  src: url(./assets/fonts/circular-std-medium.ttf);
+  src: url(./assets/fonts/circular-std-medium.woff2);
 }
 @font-face {
   font-family: neue-montreal;
-  src: url(./assets/fonts/NeueMontreal-Regular.ttf);
+  src: url(./assets/fonts/NeueMontreal-Regular.woff2);
 }
 @font-face {
   font-family: roslindale-display;
-  src: url(./assets/fonts/RoslindaleDisplayCondensed-Regular.ttf);
+  src: url(./assets/fonts/RoslindaleDisplayCondensed-Regular.woff2);
 }
 @font-face {
   font-family: gtAlpina;
-  src: url(./assets/fonts/GT-Alpina-Regular-Italic.ttf);
+  src: url(./assets/fonts/GT-Alpina-Regular-Italic.woff2);
 }
 @font-face {
   font-family: BebasNeue-Regular;
-  src: url(./assets/fonts/BebasNeue-Regular.ttf);
+  src: url(./assets/fonts/BebasNeue-Regular.woff2);
 }
 @font-face {
   font-family: Canopee-Regular;
-  src: url(./assets/fonts/Canopee-Regular.otf);
+  src: url(./assets/fonts/Canopee-Regular.woff2);
 }
 
 .menu {
@@ -101,7 +101,9 @@
   .flex-center {
     @apply flex items-center justify-center;
   }
-
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
   .nav-height {
     @apply h-[calc(100vh-20px)];
   }
@@ -122,6 +124,38 @@
   width: calc(40rem + 40vw);
   font-size: calc(1.5rem + 1vw);
   line-height: calc(3rem + 2vw);
+}
+
+.button {
+  width: 100px;
+  height: 40px;
+  border-radius: 24px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.element {
+  width: 100%;
+  height: 100%;
+  background: #37eba9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #121315;
+  text-transform: uppercase;
+}
+.element:nth-child(2) {
+  position: absolute;
+  top: 100%;
+  background: black;
+  color: white;
 }
 
 @media (max-width: 1279px) {
