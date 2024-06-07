@@ -69,6 +69,8 @@ const Menu = () => {
         }}
       >
         <motion.button
+          type="button"
+          name="menu-button"
           initial={false}
           animate={toggle ? 'open' : 'close'}
           className={`relative active:border-none rounded-full text-2xl w-14 h-14 md:w-[3.2rem] md:h-[3.2rem] cursor-pointer bg-white/30 backdrop-blur z-[400]`}
@@ -143,11 +145,7 @@ const Menu = () => {
             {NavLinks.map((link, i) => (
               <li className="relative" key={i}>
                 <TextHoverEffect link={link} />
-                <a
-                  id={link}
-                  href={`/#${link}`}
-                  className="hidden xl:block text-[2rem]"
-                >
+                <a href={`/#${link}`} className="hidden xl:block text-[2rem]">
                   {link}
                 </a>
               </li>
