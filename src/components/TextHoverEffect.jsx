@@ -43,6 +43,7 @@ const TextHoverEffect = ({ link }) => {
   return (
     <>
       <a
+        id={link}
         href={`/#${link}`}
         className="block font-bold text-[2rem] uppercase xl:hidden tracking-widest px-4 py-3 rounded-tl-md rounded-tr-lg rounded-bl-lg rounded-br-3xl cursor-pointer hover:text-black hover:bg-cyan xl:hover:text-white transition ease-in-out delay-150"
       >
