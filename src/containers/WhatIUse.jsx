@@ -151,14 +151,14 @@ const WhatIUse = () => {
 
   return (
     <section
-      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden xl:flex-center flex-col relative whatIUse"
+      className=" w-full h-screen space-y-[8rem] xl:space-y-[1rem] overflow-hidden xl:flex-center flex-col relative whatIUse xl:mt-[5rem]"
       ref={skillRef}
     >
       <h1
         style={{
           fontSize: 'calc(2.5rem + 2.5vw)',
         }}
-        className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 skill-title"
+        className="absolute text-white -translate-x-1/2 top-14 xl:top-1 font-Canopee-Regular left-1/2 skill-title "
       >
         What I use
       </h1>

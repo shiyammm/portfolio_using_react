@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { projectsData } from '../../lib/data';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/all';
 import TiltImage from '../components/TiltImage';
 import { FiExternalLink } from 'react-icons/fi';
 import { GlobalContext } from '../../context/GlobalContext';
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -133,6 +134,19 @@ const Works = () => {
     { scope: projectsSmallScreenDiv },
   );
 
+  const isMd = useMediaQuery({ query: '(max-width: 767px)' });
+
+  useEffect(() => {
+    // Ensure only one section is focused on navigation
+    if (isMd) {
+      component.current.removeAttribute('id');
+      projectsSmallScreenDiv.current.setAttribute('id', 'Works');
+    } else {
+      component.current.setAttribute('id', 'Works');
+      projectsSmallScreenDiv.current.removeAttribute('id');
+    }
+  }, [isMd]);
+
   const handleHoverLinkEnter = () => {
     setHoverLink(true);
   };
@@ -146,7 +160,11 @@ const Works = () => {
 
   return (
     <>
-      <section ref={component} className="overflow-hidden xl:hidden" id="Works">
+      <section
+        ref={component}
+        className="overflow-hidden xl:hidden"
+        id={isMd ? '' : 'Works'}
+      >
         <div ref={slider} className="flex h-screen w-fit flex-nowrap ">
           <div className="w-screen h-screen flex-center">
             <h2
@@ -238,6 +256,7 @@ const Works = () => {
       <section
         className="relative items-center justify-center hidden w-full h-screen px-6 text-white xl:flex works-mob"
         ref={projectsSmallScreenDiv}
+        id={isMd ? 'Works' : ''}
       >
         <h1
           style={{

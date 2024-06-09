@@ -10,8 +10,8 @@ const Menu = () => {
 
   const variants = {
     open: {
-      width: 400,
-      height: 550,
+      width: 'calc(11.5rem + 11.5vw)',
+      height: 'calc(15.5rem + 15.5vw)',
       top: '-25px',
       right: '-25px',
       transition: {
@@ -23,8 +23,8 @@ const Menu = () => {
     closed: {
       width: 100,
       height: 40,
-      top: '0px',
       right: '0px',
+      top: '0px',
       transition: {
         duration: 0.5,
         delay: 0.5,
@@ -62,8 +62,19 @@ const Menu = () => {
       >
         <AnimatePresence>
           {isActive && (
-            <div className="flex flex-col justify-between h-full pt-20 pb-10 pl-16 pr-10">
-              <div className="gap-10 space-y-3 body">
+            <div
+              className="flex flex-col justify-between h-full"
+              style={{
+                paddingLeft: 'calc(1.9rem + 1.9vw)',
+                paddingTop: 'calc(2.9rem + 2.9vw)',
+                paddingBottom: 'calc(1.9rem + 1.9vw)',
+                paddingRight: 'calc(1.5rem + 1.5vw)',
+              }}
+            >
+              <div
+                className="grid body"
+                style={{ gap: 'calc(0.5rem + 0.5vw)' }}
+              >
                 {NavLinks.map((navLink, i) => (
                   <motion.div
                     key={navLink}
@@ -74,10 +85,12 @@ const Menu = () => {
                     animate="enter"
                     exit="exit"
                   >
-                    <a href="" className="text-[40px] flex">
-                      {/* <TextHoverEffect> */}
+                    <a
+                      href={`/#${navLink}`}
+                      className="text-[40px] flex "
+                      style={{ fontSize: 'calc(1.1rem + 1.1vw)' }}
+                    >
                       {navLink}
-                      {/* </TextHoverEffect> */}
                     </a>
                   </motion.div>
                 ))}
@@ -95,10 +108,16 @@ const Menu = () => {
                 exit="exit"
               >
                 {SocialLinks.map((social, i) => (
-                  <div className="flex items-center gap-2" key={social.name}>
+                  <a
+                    href={social.url}
+                    key={social.name}
+                    style={{ fontSize: 'calc(0.7rem + 0.7vw)' }}
+                    className="flex items-center gap-2 cursor-pointer"
+                  >
+                    {' '}
                     <social.icon />
-                    <a href="http://">{social.name}</a>
-                  </div>
+                    <span>{social.name}</span>
+                  </a>
                 ))}
               </motion.div>
             </div>
@@ -118,10 +137,18 @@ const Menu = () => {
             ease: [0.76, 0, 0.24, 1],
           }}
         >
-          <div className="element">
+          <div
+            className="element bg-cyan"
+            style={{ fontSize: 'calc(0.6rem + 0.6vw)' }}
+          >
             <p>Menu</p>
           </div>
-          <div className="element">
+          <div
+            className="bg-black element"
+            style={{
+              fontSize: 'calc(0.6rem + 0.6vw)',
+            }}
+          >
             <p>Close</p>
           </div>
         </motion.div>
