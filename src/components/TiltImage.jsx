@@ -62,7 +62,7 @@ const TiltImage = ({ projectImage, index, setHoverLink }) => {
         }}
         key={index}
         alt=""
-        className={`w-[59rem] h-[39rem] object-cover rounded-[2rem] absolute inset-2 place-content-center ${
+        className={`w-[59rem] h-[39rem] object- rounded-[2rem] absolute inset-2 place-content-center ${
           index === 1 ? 'object-left' : index === 2 ? 'object-[40%]' : ''
         }`}
       />

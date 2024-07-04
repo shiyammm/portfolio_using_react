@@ -241,7 +241,12 @@ const Works = () => {
                   <div className="space-x-[1rem] pt-[1rem]">
                     {project.tags.map((tech, index) => (
                       <button key={index} className="">
-                        <span className="py-2 text-lg 2xl:text-md font-medium tracking-[0.1rem] text-white border-[1px] rounded-2xl px-6 2xl:px-4">
+                        <span
+                          className="py-3 font-medium tracking-[0.1rem] text-white border-[1px] rounded-xl px-6 2xl:px-4"
+                          style={{
+                            fontSize: 'calc(0.5rem + 0.5vw)',
+                          }}
+                        >
                           {tech}
                         </span>
                       </button>
