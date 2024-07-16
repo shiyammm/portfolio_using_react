@@ -35,13 +35,6 @@ const WhatIUse = () => {
         ease: 'power4.out',
       });
 
-      tl4.current.from('.options', {
-        y: 30,
-        opacity: 0,
-        duration: 0.4,
-        ease: 'power4.out',
-      });
-
       tl4.current.from(skillWrapper.current, {
         y: 80,
         opacity: 0,
@@ -61,21 +54,6 @@ const WhatIUse = () => {
         opacity: 0,
         y: 80,
         ease: 'power1.inOut',
-      });
-
-      gsap.to('.arrow-left', {
-        x: -10,
-        duration: 1,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-      gsap.to('.arrow-right', {
-        x: 10,
-        duration: 1,
-        ease: 'power1.inOut',
-        repeat: -1,
-        yoyo: true,
       });
 
       ScrollTrigger.create({
